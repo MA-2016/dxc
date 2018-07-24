@@ -1,5 +1,6 @@
 package com.mobileai.dxc.service;
 
+import com.mobileai.dxc.db.pojo.Order;
 import com.mobileai.dxc.util.Result;
 
 public interface SellerService {
@@ -8,7 +9,7 @@ public interface SellerService {
      * 通知商家新的订单待接受，由OrderService调用
      * @param oid 订单号
      */
-    void notifyNewOrder(int oid);
+    void notifyNewOrder(Order order);
 
     /**
      * 商家接受订单
