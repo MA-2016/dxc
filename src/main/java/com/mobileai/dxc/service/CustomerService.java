@@ -7,6 +7,6 @@ public interface CustomerService {
     /**
      * @param 订单信息
      */
-    Result submitOrder();
+    Result submitOrder(int userId, int sellerId, int number, long serviceTime, int[] service);
 
 }
