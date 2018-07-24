@@ -11,6 +11,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
+/**
+ * config
+ */
 @Data
 @Component
 @ConfigurationProperties(prefix = "pay.wxpay")
