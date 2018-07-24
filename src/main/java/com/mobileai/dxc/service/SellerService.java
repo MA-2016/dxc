@@ -8,14 +8,14 @@ public interface SellerService {
      * 通知商家新的订单待接受，由OrderService调用
      * @param oid 订单号
      */
-    void notifyNewOrder(String oid);
+    void notifyNewOrder(int oid);
 
     /**
      * 商家接受订单
      * @param oid 订单号
      * @return 操作结果
      */
-    Result acceptOrder(String oid);
+    Result acceptOrder(int oid);
 
     /**
      * 商家拒绝订单
@@ -23,6 +23,6 @@ public interface SellerService {
      * @param reason 拒绝原因
      * @return 操作结果
      */
-    Result refuseOrder(String oid, String reason);
+    Result refuseOrder(int oid, String reason);
 
 }

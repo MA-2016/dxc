@@ -1,4 +1,4 @@
-package com.mobileai.dxc.pojo;
+package com.mobileai.dxc.db.pojo;
 
 import lombok.Data;
 
