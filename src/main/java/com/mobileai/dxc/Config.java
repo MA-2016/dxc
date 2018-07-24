@@ -1,6 +1,6 @@
-package com.yidongzhineng.dxc;
+package com.mobileai.dxc;
 
-import com.yidongzhineng.dxc.config.WxConfig;
+import com.mobileai.dxc.config.WxConfig;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

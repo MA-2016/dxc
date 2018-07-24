@@ -1,8 +1,8 @@
 
-package com.yidongzhineng.dxc.service;
+package com.mobileai.dxc.service;
 
 import com.github.wxpay.sdk.WXPay;
-import com.yidongzhineng.dxc.config.MyWxPayConfig;
+import com.mobileai.dxc.config.MyWxPayConfig;
 
 import java.util.HashMap;
 import java.util.Map;

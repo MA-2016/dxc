@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.yidongzhineng</groupId>
+    <groupId>com.mobileai</groupId>
     <artifactId>dxc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>dxc</name>
-    <description>Demo project for Spring Boot</description>
+    <description>dxc</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -59,6 +59,13 @@
             <artifactId>wxpay-sdk</artifactId>
             <version>0.0.3</version>
         </dependency>
+		<!-- json -->
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
     </dependencies>
 
     <build>
