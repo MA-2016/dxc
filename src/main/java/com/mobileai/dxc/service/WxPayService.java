@@ -7,6 +7,9 @@ import com.mobileai.dxc.config.MyWxPayConfig;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 支付模块虎哥负责
+ */
 public class WxPayService extends WXPay {
 
 
