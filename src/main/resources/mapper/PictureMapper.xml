@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yidongzhineng.dxc.Mapper.PictureMapper" >
+  <resultMap id="BaseResultMap" type="com.yidongzhineng.dxc.POJO.Picture" >
+    <constructor >
+      <idArg column="pic_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="seller_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pic_Path" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pic_id, seller_id, pic_Path
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yidongzhineng.dxc.POJO.PictureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yidongzhineng.dxc.POJO.PictureKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from picture
+    where pic_id = #{picId,jdbcType=INTEGER}
+      and seller_id = #{sellerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.yidongzhineng.dxc.POJO.PictureKey" >
+    delete from picture
+    where pic_id = #{picId,jdbcType=INTEGER}
+      and seller_id = #{sellerId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yidongzhineng.dxc.POJO.PictureExample" >
+    delete from picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yidongzhineng.dxc.POJO.Picture" >
+    insert into picture (pic_id, seller_id, pic_Path
+      )
+    values (#{picId,jdbcType=INTEGER}, #{sellerId,jdbcType=INTEGER}, #{picPath,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yidongzhineng.dxc.POJO.Picture" >
+    insert into picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="picId != null" >
+        pic_id,
+      </if>
+      <if test="sellerId != null" >
+        seller_id,
+      </if>
+      <if test="picPath != null" >
+        pic_Path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="picId != null" >
+        #{picId,jdbcType=INTEGER},
+      </if>
+      <if test="sellerId != null" >
+        #{sellerId,jdbcType=INTEGER},
+      </if>
+      <if test="picPath != null" >
+        #{picPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yidongzhineng.dxc.POJO.PictureExample" resultType="java.lang.Integer" >
+    select count(*) from picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update picture
+    <set >
+      <if test="record.picId != null" >
+        pic_id = #{record.picId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellerId != null" >
+        seller_id = #{record.sellerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.picPath != null" >
+        pic_Path = #{record.picPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update picture
+    set pic_id = #{record.picId,jdbcType=INTEGER},
+      seller_id = #{record.sellerId,jdbcType=INTEGER},
+      pic_Path = #{record.picPath,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yidongzhineng.dxc.POJO.Picture" >
+    update picture
+    <set >
+      <if test="picPath != null" >
+        pic_Path = #{picPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pic_id = #{picId,jdbcType=INTEGER}
+      and seller_id = #{sellerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yidongzhineng.dxc.POJO.Picture" >
+    update picture
+    set pic_Path = #{picPath,jdbcType=VARCHAR}
+    where pic_id = #{picId,jdbcType=INTEGER}
+      and seller_id = #{sellerId,jdbcType=INTEGER}
+  </update>
+</mapper>
