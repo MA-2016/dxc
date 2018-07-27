@@ -24,7 +24,7 @@ public class MailSender {
     private static String EmailPassword = "MobileAI403";
     private static String EmailSMTPhost = "smtp.sina.com";
     
-    public void sendMail(String toEmail , String identifyCode){
+    public static void sendMail(String toEmail , String identifyCode){
         Properties props = new Properties();
 
         props.setProperty("smtp.debug", "true");

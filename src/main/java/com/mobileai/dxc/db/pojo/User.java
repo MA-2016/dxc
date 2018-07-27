@@ -41,6 +41,10 @@ public class User {
             return this;
         }
 
+        public String getEmail(){
+            return ins.email;
+        }
+
         public Builder setName(String name) {
             ins.name = name;
             return this;
