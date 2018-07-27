@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "dxc",
+                "projectName": "dxc",
+                "workingDirectory": "c:\\Users\\levi\\Desktop\\工作室\\Git\\dxc",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "dxc",
+                "projectName": "dxc",
+                "workingDirectory": "c:\\Users\\levi\\Desktop\\工作室\\Git\\dxc",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}
