@@ -66,6 +66,7 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
+<<<<<<< HEAD
 
         <!-- mail   -->
         <dependency>
@@ -80,6 +81,15 @@
             <version>2.22.0</version>
             <type>maven-plugin</type>
         </dependency>
+=======
+        <!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+
+>>>>>>> 4aac69478bb86e5545eb22d83ff753aad4a20ed5
     </dependencies>
 
     <build>
