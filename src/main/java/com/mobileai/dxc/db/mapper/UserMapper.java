@@ -10,8 +10,8 @@ public interface UserMapper {
     @Select("select email from User where user_id = #{userId}")
     String selectEmailById( @Param("userId")int userId);
 
-
     @Select("select * from User where user_id = #{userId}")
     User selectById(@Param("userId")int userId);
 
+    
 }

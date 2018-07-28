@@ -1,12 +1,8 @@
 package com.mobileai.dxc.component;
 
-import com.github.wxpay.sdk.WXPayUtil;
 import com.mobileai.dxc.db.pojo.Record;
 import com.mobileai.dxc.service.RecordSevice;
 import com.mobileai.dxc.service.imple.WxPayService;
-import com.sun.xml.internal.bind.v2.TODO;
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

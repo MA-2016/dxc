@@ -6,7 +6,6 @@ import com.mobileai.dxc.service.UserService;
 import com.mobileai.dxc.util.Result;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,7 +23,7 @@ public class UserServiceImple implements UserService {
     }
 
     @Override
-    public Result signin(String identifyCode, String name, String password){
+    public Result signup(String identifyCode, String name, String password){
         if(name==password){
             return new Result(200);
         }else{
