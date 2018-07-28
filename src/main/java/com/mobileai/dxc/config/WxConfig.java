@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 将wxPay转化为bean，装入到容器中
  */
-@Configuration
+// @Configuration
 public class WxConfig {
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.yidongzhineng.dxc;
+package com.mobileai.dxc;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

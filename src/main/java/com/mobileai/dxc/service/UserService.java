@@ -14,7 +14,7 @@ public interface UserService {
      * @param name
      * @param password
      */
-    Result signup(String identifyCode, String name, String password);
+    Result signup(String identifyCode, String name, String password,boolean seller);
 
     /**
      * 验证，注意数据库里存储的password字段应该是密码明文的hashcode（安全性）

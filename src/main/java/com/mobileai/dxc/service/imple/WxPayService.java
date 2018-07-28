@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * 支付模块虎哥负责
  */
-@Service
+// @Service
 public class WxPayService extends WXPay {
 
     @Autowired

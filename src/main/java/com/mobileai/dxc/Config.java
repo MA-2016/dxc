@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Import(WxConfig.class)
+// @Import(WxConfig.class)
 @MapperScan("com.mobileai.dxc.db.mapper")
 @Configuration
 public class Config implements WebMvcConfigurer {
-
+    
 }

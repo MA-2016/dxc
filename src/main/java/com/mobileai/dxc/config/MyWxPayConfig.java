@@ -15,8 +15,8 @@ import java.io.InputStream;
  * config
  */
 @Data
-@Component
-@ConfigurationProperties(prefix = "pay.wxpay")
+// @Component
+// @ConfigurationProperties(prefix = "pay.wxpay")
 public class MyWxPayConfig implements WXPayConfig {
 
 

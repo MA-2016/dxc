@@ -7,12 +7,16 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface AccountMapper{
-    @Insert("insert into account(username,password) values (#{username },#{password})")
-    int addAccount(@Param("username")String username,@Param("password")String password);
+    @Insert("insert into account(username,password,seller,target_id) values (#{username },#{password},#{seller},#{targetid})")
+    int addAccount(@Param("username")String username,@Param("password")String password,@Param("seller")boolean seller,@Param("targetid")int targetid);
 
     @Select("select password from account where username = #{username}")
-    int selectPasswordByUsername( @Param("username")String username);
+    String selectPasswordByUserName( @Param("username")String username);
 
-    @Select("select seller from account where id = #{accountid}")
-    boolean selectsellerbyId(@Param("accountid") int accountid);
+    @Select("select targetid from account where username = #{username}")
+    int selecttargetIdByUserName(@Param("username")String username);
+    
+    @Select("select seller from account where username = #{username}")
+    boolean IsSeller(@Param("username") String username);
+    
 }

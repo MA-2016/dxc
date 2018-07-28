@@ -1,6 +1,6 @@
-package com.yidongzhineng.dxc;
+package com.mobileai.dxc.db;
 
-import com.mobileai.dxc.db.mapper.AccountMapper;
+
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,13 +10,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AccountMapperTest {
-    @Autowired
-    public AccountMapper accountmapper;
+public class TestOrderMapper {
 
-    @Test
-    public void addAccount () {
-        accountmapper.addAccount("dcxs", "fhdask");
-    }
+
+
 
 }

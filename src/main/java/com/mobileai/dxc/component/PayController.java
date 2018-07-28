@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Map;
-@RestController
+
+// @RestController
 @RequestMapping("/pay")
 public class PayController {
     @Autowired
