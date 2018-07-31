@@ -1,9 +1,11 @@
 package com.mobileai.dxc.component;
 
 
+
 import com.mobileai.dxc.db.pojo.Record;
 import com.mobileai.dxc.service.RecordSevice;
 import com.mobileai.dxc.service.imple.WxPayService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Map;
 
+
 @RestController
+
 @RequestMapping("/pay")
 public class PayController {
     @Autowired
