@@ -14,9 +14,9 @@ import java.io.InputStream;
 /**
  * config
  */
-@Data
-@Component
-@ConfigurationProperties(prefix = "pay.wxpay")
+
+
+//@ConfigurationProperties(prefix = "pay.wxpay")
 public class MyWxPayConfig implements WXPayConfig {
 
 
@@ -59,14 +59,15 @@ public class MyWxPayConfig implements WXPayConfig {
     private int httpReadTimeoutMs = 10000;
 
 
-    public MyWxPayConfig() throws Exception {
-
-        File file = new File(certPath);
-        InputStream certStream = new FileInputStream(file);
-        this.certData = new byte[(int) file.length()];
-        certStream.read(this.certData);
-        certStream.close();
-    }
+    public MyWxPayConfig(){}
+//    public MyWxPayConfig() throws Exception {
+//
+//        File file = new File(certPath);
+//        InputStream certStream = new FileInputStream(file);
+//        this.certData = new byte[(int) file.length()];
+//        certStream.read(this.certData);
+//        certStream.close();
+//    }
 
     /**
      * 获取商户证书内容

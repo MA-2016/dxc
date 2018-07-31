@@ -20,6 +20,8 @@ public class WxPayService extends WXPay {
     @Autowired
     private RecordMapper recordMapper;
 
+
+
     private static MyWxPayConfig config;
 
     static {
