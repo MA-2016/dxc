@@ -1,8 +1,12 @@
 package com.mobileai.dxc.controller;
 
+
+
 import com.mobileai.dxc.db.pojo.Record;
 import com.mobileai.dxc.service.RecordSevice;
 import com.mobileai.dxc.service.imple.WxPayService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +18,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Map;
 
+<<<<<<< HEAD:src/main/java/com/mobileai/dxc/controller/PayController.java
 // @RestController
 @EnableAutoConfiguration
+=======
+
+@RestController
+
+>>>>>>> 30a93d6dc56103e05da8919dcbf0438ae518ba21:src/main/java/com/mobileai/dxc/component/PayController.java
 @RequestMapping("/pay")
 public class PayController {
     @Autowired
@@ -26,19 +36,25 @@ public class PayController {
 
     //请求支付发起，返回支付链接 用此生成二维码
 
+    @GetMapping("/test")
+    public String test(){
+        return "success111";
+    }
+
     /**
      * 请求支付发起
+     *
      * @param recordId 订单记录号
      * @return 返回支付链接 用此生成二维码
      */
 
     @GetMapping("/applyOrder")
-    public String applyOrder(@RequestParam int recordId){
-        Record record=recordSevice.getById(recordId);
-        String orderId=record.getOrderId()+"";
-        int fee=record.getFee()*100;
-        String out_trade_no=recordId+"";
-        String url=wxPayService.applyOrder(orderId, fee, out_trade_no);
+    public String applyOrder(@RequestParam int recordId) {
+        Record record = recordSevice.getById(recordId);
+        String orderId = record.getOrderId() + "";
+        int fee = record.getFee() * 100;
+        String out_trade_no = recordId + "";
+        String url = wxPayService.applyOrder(orderId, fee, out_trade_no);
 
         return url;
     }
@@ -46,29 +62,31 @@ public class PayController {
 
     /**
      * 请求退款
+     *
      * @param recordId 支付记录id
-     * @return  退款是否成功，分为2次查询，中间设有20s的时间间隔
+     * @return 退款是否成功，分为2次查询，中间设有20s的时间间隔
      * @throws Exception
      */
     @GetMapping("/applyRefund")
     public boolean queryRefund(@RequestParam int recordId) throws Exception {
         wxPayService.applyRefund(recordId);
-        boolean bool= wxPayService.queryRefund(recordId);
-        int status= Record.StatusCode.APPLY_REFUND;
-        if(bool){
-            status= Record.StatusCode.REFUND_SUCCESS;
-        }else {
-            status=Record.StatusCode.REFUND_FAILED;
+        boolean bool = wxPayService.queryRefund(recordId);
+        int status = Record.StatusCode.APPLY_REFUND;
+        if (bool) {
+            status = Record.StatusCode.REFUND_SUCCESS;
+        } else {
+            status = Record.StatusCode.REFUND_FAILED;
         }
         recordSevice.updateStatusByRecord(0, recordId);
         // TODO: 2018/7/25  退款成功就把订单的状态设为结束
 
         return bool;
     }
+
     //取消支付接口
     @GetMapping("/cancalPay")
-    public  boolean cancelPay( @RequestParam int recordId) throws Exception {
-        String trade_no=recordId+"";
+    public boolean cancelPay(@RequestParam int recordId) throws Exception {
+        String trade_no = recordId + "";
         return wxPayService.cancelPay(trade_no);
 
     }
