@@ -18,14 +18,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Map;
 
-<<<<<<< HEAD:src/main/java/com/mobileai/dxc/controller/PayController.java
 // @RestController
 @EnableAutoConfiguration
-=======
-
-@RestController
-
->>>>>>> 30a93d6dc56103e05da8919dcbf0438ae518ba21:src/main/java/com/mobileai/dxc/component/PayController.java
 @RequestMapping("/pay")
 public class PayController {
     @Autowired
