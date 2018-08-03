@@ -7,7 +7,6 @@ import com.mobileai.dxc.db.mapper.AccountMapper;
 import com.mobileai.dxc.db.mapper.UserMapper;
 import com.mobileai.dxc.service.UserService;
 import com.mobileai.dxc.util.MD5Utils;
-import com.mobileai.dxc.util.Result;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,34 +24,34 @@ public class UserServiceImple implements UserService {
     private String email;
 
     @Override
-    public Result identify(String toEmail) {
+    public boolean identify(String toEmail) {
         email = toEmail;
         identifyCode = getidentifyCode();
         MailSender.sendMail(toEmail, identifyCode);
-        return new Result(200);
+        return true;
     }
 
     @Override
-    public Result signup(String identifyCode, String name, String password, boolean seller) {
+    public boolean signup(String identifyCode, String name, String password, boolean seller) {
         if (identifyCode == this.identifyCode) {
             int targetid = userMapper.selectIdByEmail(email);
             String secretpassword = MD5Utils.md5(password);
 
             accountMapper.addAccount(name, secretpassword, seller, targetid);
-            return new Result(200);
+            return true;
         }else{
-            return new Result(100);
+            return false;
         }
     }
 
     @Override
-    public Result validate(String name, String password) {
+    public boolean validate(String name, String password) {
         String secretpassword = MD5Utils.md5(password);
 
         if (secretpassword == accountMapper.selectPasswordByUserName(name)) {
-            return new Result(200);
+            return true;
         } else {
-            return new Result(100);
+            return false;
         }
     }
 

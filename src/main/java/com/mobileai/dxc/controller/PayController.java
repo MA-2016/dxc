@@ -1,9 +1,10 @@
-package com.mobileai.dxc.component;
+package com.mobileai.dxc.controller;
 
 import com.mobileai.dxc.db.pojo.Record;
 import com.mobileai.dxc.service.RecordSevice;
 import com.mobileai.dxc.service.imple.WxPayService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 // @RestController
+@EnableAutoConfiguration
 @RequestMapping("/pay")
 public class PayController {
     @Autowired
@@ -94,7 +96,7 @@ public class PayController {
             map = wxPayService.queryPay(result);
 
         }
-        // TODO: 2018/7/25 gai改变订单的状态
+        // TODO: 2018/7/25    改变订单的状态
         if ("SUCCESS".equals(map.get("return_code"))) {
             //调用通知前端的接口
         } else {

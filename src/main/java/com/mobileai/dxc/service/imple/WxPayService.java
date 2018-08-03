@@ -6,7 +6,6 @@ import com.github.wxpay.sdk.WXPayUtil;
 import com.mobileai.dxc.config.MyWxPayConfig;
 import com.mobileai.dxc.db.mapper.RecordMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
