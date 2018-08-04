@@ -1,4 +1,4 @@
-package com.mobileai.dxc.component;
+package com.mobileai.dxc.util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -12,13 +12,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.stereotype.Component;
 
 
 /**
  * 提供邮件发送服务
  */
-@Component
 public class MailSender {
     private static String FromEmail = "mobile_dxc@sina.com";
     private static String EmailPassword = "MobileAI403";

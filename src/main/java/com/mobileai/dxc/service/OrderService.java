@@ -12,7 +12,7 @@ public interface OrderService {
      * @param 订单信息
      * @return 订单号
      */
-    void submitOrder(Order order);
+    int submitOrder(Order order);
 
     /**
      * 确认已支付，由WxPayService调用

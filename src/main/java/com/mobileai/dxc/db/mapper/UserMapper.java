@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface UserMapper {
     @Insert("insert into user(email) values (#{email}")
+    @Options(useGeneratedKeys = true, keyProperty = "user_id")
     int addAccount(@Param("email")String email);
 
     @Select("select user_id from user where email = #{email}")

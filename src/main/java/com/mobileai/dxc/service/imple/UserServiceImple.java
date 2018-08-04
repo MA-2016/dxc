@@ -2,11 +2,11 @@ package com.mobileai.dxc.service.imple;
 
 import java.util.Random;
 
-import com.mobileai.dxc.component.MailSender;
 import com.mobileai.dxc.db.mapper.AccountMapper;
 import com.mobileai.dxc.db.mapper.UserMapper;
 import com.mobileai.dxc.service.UserService;
 import com.mobileai.dxc.util.MD5Utils;
+import com.mobileai.dxc.util.MailSender;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,7 @@ public class UserServiceImple implements UserService {
     @Override
     public boolean signup(String identifyCode, String name, String password, boolean seller) {
         if (identifyCode == this.identifyCode) {
-            int targetid = userMapper.selectIdByEmail(email);
+            int targetid = userMapper.addAccount(email);
             String secretpassword = MD5Utils.md5(password);
 
             accountMapper.addAccount(name, secretpassword, seller, targetid);
@@ -48,7 +48,7 @@ public class UserServiceImple implements UserService {
     public boolean validate(String name, String password) {
         String secretpassword = MD5Utils.md5(password);
 
-        if (secretpassword == accountMapper.selectPasswordByUserName(name)) {
+        if (secretpassword.equals(accountMapper.selectPasswordByUserName(name))) {
             return true;
         } else {
             return false;
