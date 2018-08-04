@@ -10,7 +10,7 @@ import com.mobileai.dxc.util.MailSender;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+//周恩华负责
 @Service
 public class UserServiceImple implements UserService {
 

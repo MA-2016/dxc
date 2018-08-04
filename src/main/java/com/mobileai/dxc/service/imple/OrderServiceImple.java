@@ -6,7 +6,7 @@ import com.mobileai.dxc.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+//周恩华负责
 @Service
 public class OrderServiceImple implements OrderService{
 
@@ -16,11 +16,12 @@ public class OrderServiceImple implements OrderService{
     /**
      * 提交新订单，由CustomerService调用
      * @param 订单信息
+     * 
      * @return 订单号
      */
     @Override 
     public int submitOrder(Order order){
-        indentMapper.createOrder(order.getUserId());
+        indentMapper.createOrder(order.getUserId(),order.getSellerId(),order.getNumber(),order.getServiceTime(),order.getService());
 
         return indentMapper.selectOrderidByUserid(order.getUserId());
     }   

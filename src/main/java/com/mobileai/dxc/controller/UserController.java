@@ -4,15 +4,13 @@ package com.mobileai.dxc.controller;
 import com.mobileai.dxc.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
+//周恩华负责
 @RestController
 @RequestMapping("/user")
 
@@ -28,7 +26,7 @@ public class UserController{
      * 
      * @return 返回是否注册成功
      */
-    @GetMapping("/signup/register")
+    @PostMapping("/signup/register")
     public boolean register(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,@RequestParam boolean beSeller){
         return userservice.signup(identifyCode, account, password, beSeller);
     }
@@ -39,7 +37,7 @@ public class UserController{
      * 
      * @return 返回发送邮件成功
      */
-    @GetMapping("/signup/getidentifyCode")
+    @PostMapping("/signup/sendidentifyCode")
     public boolean sendidentifyCode(@RequestParam String email){
         return userservice.identify(email);
     }
@@ -52,7 +50,7 @@ public class UserController{
      * 
      * @return 返回是否登录成功
      */
-    @GetMapping("/login/validate")
+    @PostMapping("/login/validate")
     public boolean validate(@RequestParam String account,@RequestParam String password){
         return userservice.validate(account, password);
     }

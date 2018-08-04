@@ -9,8 +9,8 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface IndentMapper {
 
-    @Insert("insert into indent(user_id) values(#{userId})")
-    void createOrder(@Param("userId") int userId);
+    @Insert("insert into indent(user_id,seller_id,number,service_time,service) values(#{userId},#{sellerid},#{number},#{servicetime},#{service})")
+    void createOrder(@Param("userId") int userId,@Param("sellerid") int sellerid,@Param("number") int number,@Param("service_time")long servicetime,@Param("service")String service);
 
     @Select("select order_id from indent where user_id = #{userId}")
     int selectOrderidByUserid(@Param("userId")int userId);
