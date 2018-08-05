@@ -1,5 +1,7 @@
 package com.mobileai.dxc.util;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
@@ -8,8 +10,10 @@ import java.util.Date;
 import java.util.Random;
 
 /**
- * @param to 被发送的手机号码
- * @param status 状态码：1.验证短信 2.通知短信（商家）3.通知短信（用户）
+ * 发送短信工具类
+ * 
+ * @param to     被发送的手机号码
+ * @param status 状态码：1.验证短信 2.通知短信（商家）3.通知短信（用户）4.通知短信（拒绝）
  * 
  * @return 随机数验证码
  */
@@ -26,14 +30,9 @@ public class SendMsgUtils {
     public static final String AUTH_TOKEN = "f4109d797322492b80b1ebf7e2816a6f";
 
     /**
-     * Validate_URL:验证请求地址
+     * BASE_URL:验证请求地址
      */
-    public static final String Validate_URL = "https://api.miaodiyun.com/20150822/industrySMS/sendSMS";
-
-    /**
-     * Inform_URL:通知请求地址
-     */
-    public static final String Inform_URL = "https://api.miaodiyun.com/20150822/affMarkSMS/sendSMS";
+    public static final String BASE_URL = "https://api.miaodiyun.com/20150822/industrySMS/sendSMS";
 
     /**
      * RESP_DATA_TYPE:数据返回格式为JSON格式
@@ -48,9 +47,9 @@ public class SendMsgUtils {
     /**
      * smsContent_validate:短信内容(短信签名+短信内容，注意要和配置的模板一致，否则报错)
      */
-    public static String smsContent_validate = "【稻香村】尊敬的用户，您的验证码为" + randNum;
-    public static String smsContent_inform_seller = "【稻香村】亲爱的用户，您有新的订单等待确认，请及时登录。";
-    public static String smsContent_inform_user = "【稻香村】亲爱的用户，您的申请已经被接受，请在约定时间到达当地享受农家乐的欢愉吧！";
+
+    public static String[] smsContent = { "【稻香村】尊敬的用户，您的验证码为" + randNum, "【稻香村】亲爱的用户，您有新的订单等待确认，请及时登录。",
+            "【稻香村】亲爱的用户，您的申请已经被接受，请在约定时间到达当地享受农家乐的欢愉吧！" ,"【稻花香】你有一个订单被退回，登录网站了解详情。"};
 
     /**
      * 
@@ -73,68 +72,33 @@ public class SendMsgUtils {
         /**
          * 要提交的post数据
          */
-        String http_post_1 = "accountSid=" + ACCOUNT_SID + "&smsContent_validate=" + smsContent_validate + "&to=" + to
+        String http_post = "accountSid=" + ACCOUNT_SID + "&smsContent=" + smsContent[status-1] + "&to=" + to
                 + "&timestamp=" + timestamp + "&sig=" + sig + "&respDataType=" + RESP_DATA_TYPE;
 
-        String http_post_2 = "accountSid=" + ACCOUNT_SID + "&smsContent_validate=" + smsContent_inform_seller + "&to="
-                + to + "&timestamp=" + timestamp + "&sig=" + sig + "&respDataType=" + RESP_DATA_TYPE;
-
-        String http_post_3 = "accountSid=" + ACCOUNT_SID + "&smsContent_validate=" + smsContent_inform_user + "&to="
-                + to + "&timestamp=" + timestamp + "&sig=" + sig + "&respDataType=" + RESP_DATA_TYPE;
-
         OutputStreamWriter osw = null;
+        BufferedReader br = null;
+        StringBuffer sb = new StringBuffer();
 
-        switch (status) {
-        case 1:
-            try {
-                URL url = new URL(Validate_URL);
-                URLConnection conn = url.openConnection();
-                conn.setDoOutput(true);
-                conn.setDoInput(true);
-                conn.setConnectTimeout(5000);
-                conn.setReadTimeout(20000);
-                osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
-                osw.write(http_post_1);
-                osw.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            URL url = new URL(BASE_URL);
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(20000);
+            osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
+            osw.write(http_post);
+            osw.flush();
+            br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
             }
-            break;
-        case 2:
-            try {
-                URL url = new URL(Inform_URL);
-                URLConnection conn = url.openConnection();
-                conn.setDoOutput(true);
-                conn.setDoInput(true);
-                conn.setConnectTimeout(5000);
-                conn.setReadTimeout(20000);
-                osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
-                osw.write(http_post_2);
-                osw.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            break;
-        case 3:
-            try {
-                URL url = new URL(Inform_URL);
-                URLConnection conn = url.openConnection();
-                conn.setDoOutput(true);
-                conn.setDoInput(true);
-                conn.setConnectTimeout(5000);
-                conn.setReadTimeout(20000);
-                osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
-                osw.write(http_post_3);
-                osw.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            break;
-        default:
-            return "error";
+            System.out.println(sb.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return randNum.toString();
-
     }
 
     /**

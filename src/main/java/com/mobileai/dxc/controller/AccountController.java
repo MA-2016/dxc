@@ -1,7 +1,11 @@
 package com.mobileai.dxc.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.mobileai.dxc.service.AccountService;
+import com.mobileai.dxc.util.VerifyUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,19 +31,25 @@ public class AccountController{
      * @return 返回是否注册成功
      */
     @PostMapping("/signup/register")
-    public boolean register(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,@RequestParam boolean beSeller){
-        return accountservice.signup(identifyCode, account, password, beSeller);
+    public boolean register(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,@RequestParam boolean beSeller,HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String identifyCode_session = (String)session.getAttribute("identifyCode_session");
+        String phone = (String)session.getAttribute("phone");
+        return accountservice.signup(identifyCode, account, password, beSeller,identifyCode_session,phone);
     }
 
     /**
-     * 用户请求发送邮箱验证码
-     * @param email 用户邮箱地址
+     * 用户请求发送验证码
+     * @param phone 用户手机
      * 
-     * @return 返回发送邮件成功
+     * @return 返回发送短信成功
      */
     @PostMapping("/signup/sendidentifyCode")
-    public boolean sendidentifyCode(@RequestParam String phone){
-        return accountservice.identify(phone);
+    public boolean sendidentifyCode(@RequestParam String phone,HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.setAttribute("phone", phone);
+        session.setAttribute("identifyCode_session", accountservice.identify(phone));
+        return true;
     }
 
     /**
@@ -51,9 +61,19 @@ public class AccountController{
      * @return 返回是否登录成功
      */
     @PostMapping("/login/validate")
-    public boolean validate(@RequestParam String account,@RequestParam String password){
-        return accountservice.validate(account, password);
+    public boolean validate(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String randomStr = (String)session.getAttribute("randomStr");
+        return accountservice.validate(account, password,identifyCode,randomStr);
     }
     
+    @PostMapping("/login/getidentifyCode")
+    public byte[] getidentifyCode(HttpServletRequest request){
+        Object[] objs = VerifyUtil.createImage();
+        HttpSession session  = request.getSession();
+        session.setAttribute("randomStr", (String)objs[0]);
+
+        return (byte[])objs[1];
+    }
 
 }
