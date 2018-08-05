@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.mobileai.dxc.db.mapper.AccountMapper;
 import com.mobileai.dxc.db.mapper.UserMapper;
-import com.mobileai.dxc.service.UserService;
+import com.mobileai.dxc.service.AccountService;
 import com.mobileai.dxc.util.MD5Utils;
 import com.mobileai.dxc.util.MailSender;
 
@@ -12,13 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 //周恩华负责
 @Service
-public class UserServiceImple implements UserService {
+public class AccountServiceImple implements AccountService {
 
     @Autowired
     private UserMapper userMapper;
 
     @Autowired
     private AccountMapper accountMapper;
+
+    @Autowired
+    private SellerMapper sellerMapper;
 
     private String identifyCode;
     private String email;
@@ -33,8 +36,14 @@ public class UserServiceImple implements UserService {
 
     @Override
     public boolean signup(String identifyCode, String name, String password, boolean seller) {
+        int targetid;
         if (identifyCode == this.identifyCode) {
-            int targetid = userMapper.addAccount(email);
+            if(seller){
+                targetid = sellerMapper.addAccount(email);
+            }else{
+                targetid = userMapper.addAccount(email);
+            }
+            
             String secretpassword = MD5Utils.md5(password);
 
             accountMapper.addAccount(name, secretpassword, seller, targetid);

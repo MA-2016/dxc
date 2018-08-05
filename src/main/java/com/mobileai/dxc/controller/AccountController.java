@@ -1,7 +1,7 @@
 package com.mobileai.dxc.controller;
 
 
-import com.mobileai.dxc.service.UserService;
+import com.mobileai.dxc.service.AccountService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 //周恩华负责
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/account")
 
-public class UserController{
+public class AccountController{
     @Autowired
-    UserService userservice;
+    AccountService accountservice;
     /**
      * 用户请求注册
      * @param account 账号
@@ -28,7 +28,7 @@ public class UserController{
      */
     @PostMapping("/signup/register")
     public boolean register(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,@RequestParam boolean beSeller){
-        return userservice.signup(identifyCode, account, password, beSeller);
+        return accountservice.signup(identifyCode, account, password, beSeller);
     }
 
     /**
@@ -39,7 +39,7 @@ public class UserController{
      */
     @PostMapping("/signup/sendidentifyCode")
     public boolean sendidentifyCode(@RequestParam String email){
-        return userservice.identify(email);
+        return accountservice.identify(email);
     }
 
     /**
@@ -52,7 +52,7 @@ public class UserController{
      */
     @PostMapping("/login/validate")
     public boolean validate(@RequestParam String account,@RequestParam String password){
-        return userservice.validate(account, password);
+        return accountservice.validate(account, password);
     }
     
 

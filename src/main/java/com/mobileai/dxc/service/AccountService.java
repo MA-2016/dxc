@@ -1,7 +1,7 @@
 package com.mobileai.dxc.service;
 
 
-public interface UserService {
+public interface AccountService {
 
     /**
      * 向邮箱发送注册验证码
