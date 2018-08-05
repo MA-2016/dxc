@@ -1,7 +1,5 @@
 package com.mobileai.dxc.util;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
@@ -9,15 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
 /**
+ * @param to 被发送的手机号码
+ * @param status 状态码：1.验证短信 2.通知短信（商家）3.通知短信（用户）
  * 
- * @ClassName:SendTelMsgUtils
- * @Description:发送短信工具类
- * @author:QiXiaoQi
- * @date:2017-11-24下午11:20:23
- * @version V1.0
+ * @return 随机数验证码
  */
 public class SendMsgUtils {
 
@@ -32,9 +26,14 @@ public class SendMsgUtils {
     public static final String AUTH_TOKEN = "f4109d797322492b80b1ebf7e2816a6f";
 
     /**
-     * BASE_URL:请求地址
+     * Validate_URL:验证请求地址
      */
-    public static final String BASE_URL = "https://api.miaodiyun.com/20150822/industrySMS/sendSMS";
+    public static final String Validate_URL = "https://api.miaodiyun.com/20150822/industrySMS/sendSMS";
+
+    /**
+     * Inform_URL:通知请求地址
+     */
+    public static final String Inform_URL = "https://api.miaodiyun.com/20150822/affMarkSMS/sendSMS";
 
     /**
      * RESP_DATA_TYPE:数据返回格式为JSON格式
@@ -47,21 +46,22 @@ public class SendMsgUtils {
     static String randNum = createRandNum();
 
     /**
-     * smsContent:短信内容(短信签名+短信内容，注意要和配置的模板一致，否则报错)
+     * smsContent_validate:短信内容(短信签名+短信内容，注意要和配置的模板一致，否则报错)
      */
-    public static String smsContent = "【稻香村】尊敬的用户，您的验证码为"+randNum;
+    public static String smsContent_validate = "【稻香村】尊敬的用户，您的验证码为" + randNum;
+    public static String smsContent_inform_seller = "【稻香村】亲爱的用户，您有新的订单等待确认，请及时登录。";
+    public static String smsContent_inform_user = "【稻香村】亲爱的用户，您的申请已经被接受，请在约定时间到达当地享受农家乐的欢愉吧！";
 
     /**
      * 
      * @Title：sendMsgTo
-     * @Description：发送短信验证码
-     * @param：
+     * @Description：发送短信验证码 @param：
      * @return：String
      */
-    public static String sendMsgTo(String to,int status) {
+    public static String sendMsgTo(String to, int status) {
 
         /**
-         * 获取时间戳 
+         * 获取时间戳
          */
         String timestamp = getTimestamp();
 
@@ -73,56 +73,68 @@ public class SendMsgUtils {
         /**
          * 要提交的post数据
          */
-        String http_post = "accountSid="+ACCOUNT_SID
-                          +"&smsContent="+smsContent
-                          +"&to="+to
-                          +"&timestamp="+timestamp
-                          +"&sig="+sig
-                          +"&respDataType="+RESP_DATA_TYPE;
+        String http_post_1 = "accountSid=" + ACCOUNT_SID + "&smsContent_validate=" + smsContent_validate + "&to=" + to
+                + "&timestamp=" + timestamp + "&sig=" + sig + "&respDataType=" + RESP_DATA_TYPE;
+
+        String http_post_2 = "accountSid=" + ACCOUNT_SID + "&smsContent_validate=" + smsContent_inform_seller + "&to="
+                + to + "&timestamp=" + timestamp + "&sig=" + sig + "&respDataType=" + RESP_DATA_TYPE;
+
+        String http_post_3 = "accountSid=" + ACCOUNT_SID + "&smsContent_validate=" + smsContent_inform_user + "&to="
+                + to + "&timestamp=" + timestamp + "&sig=" + sig + "&respDataType=" + RESP_DATA_TYPE;
 
         OutputStreamWriter osw = null;
-        BufferedReader br = null;
-        StringBuffer sb = new StringBuffer();
-        try {
 
-            /**
-             * 获取连接
-             */
-            URL url = new URL(BASE_URL);
-
-            /**
-             * 打开连接
-             */
-            URLConnection conn = url.openConnection(); 
-
-            /**
-             * 设置连接参数
-             */
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
-            conn.setConnectTimeout(5000); 
-            conn.setReadTimeout(20000);
-
-            /**
-             * 提交数据
-             */
-            osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
-            osw.write(http_post);
-            osw.flush();
-
-            /**
-             * 读取返回数据
-             */
-            br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-            String line = "";
-            while((line = br.readLine()) != null) {
-                sb.append(line);
+        switch (status) {
+        case 1:
+            try {
+                URL url = new URL(Validate_URL);
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+                conn.setDoInput(true);
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(20000);
+                osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
+                osw.write(http_post_1);
+                osw.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            break;
+        case 2:
+            try {
+                URL url = new URL(Inform_URL);
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+                conn.setDoInput(true);
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(20000);
+                osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
+                osw.write(http_post_2);
+                osw.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            break;
+        case 3:
+            try {
+                URL url = new URL(Inform_URL);
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+                conn.setDoInput(true);
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(20000);
+                osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
+                osw.write(http_post_3);
+                osw.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            break;
+        default:
+            return "error";
         }
-        return sb.toString();
+        return randNum.toString();
+
     }
 
     /**
@@ -148,12 +160,11 @@ public class SendMsgUtils {
     public static String createRandNum() {
         Random random = new Random();
         StringBuffer sb = new StringBuffer();
-        for(int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= 5; i++) {
             String s = random.nextInt(10) + "";
             sb.append(s);
         }
         return sb.toString();
     }
-
 
 }

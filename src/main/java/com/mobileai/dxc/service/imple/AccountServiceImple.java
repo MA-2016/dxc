@@ -3,10 +3,11 @@ package com.mobileai.dxc.service.imple;
 import java.util.Random;
 
 import com.mobileai.dxc.db.mapper.AccountMapper;
+import com.mobileai.dxc.db.mapper.SellerMapper;
 import com.mobileai.dxc.db.mapper.UserMapper;
 import com.mobileai.dxc.service.AccountService;
 import com.mobileai.dxc.util.MD5Utils;
-import com.mobileai.dxc.util.MailSender;
+import com.mobileai.dxc.util.SendMsgUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,13 +25,12 @@ public class AccountServiceImple implements AccountService {
     private SellerMapper sellerMapper;
 
     private String identifyCode;
-    private String email;
+    private String phone;
 
     @Override
-    public boolean identify(String toEmail) {
-        email = toEmail;
-        identifyCode = getidentifyCode();
-        MailSender.sendMail(toEmail, identifyCode);
+    public boolean identify(String phone) {
+        this.phone = phone;
+        identifyCode = SendMsgUtils.sendMsgTo(phone, 1);
         return true;
     }
 
@@ -39,9 +39,9 @@ public class AccountServiceImple implements AccountService {
         int targetid;
         if (identifyCode == this.identifyCode) {
             if(seller){
-                targetid = sellerMapper.addAccount(email);
+                targetid = sellerMapper.addSeller(phone);
             }else{
-                targetid = userMapper.addAccount(email);
+                targetid = userMapper.addUser(phone);
             }
             
             String secretpassword = MD5Utils.md5(password);
@@ -63,18 +63,4 @@ public class AccountServiceImple implements AccountService {
             return false;
         }
     }
-
-    // 得到随机8位验证码
-    public String getidentifyCode() {
-        String number[] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-        StringBuilder str = new StringBuilder();
-        Random random = new Random();
-        for(int i=0;i<8;i++){
-            str.append(number[(int)random.nextInt(10)]);
-        }
-        
-        return str.toString();
-
-    }
-
 }

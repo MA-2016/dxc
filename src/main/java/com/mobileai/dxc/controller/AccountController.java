@@ -38,8 +38,8 @@ public class AccountController{
      * @return 返回发送邮件成功
      */
     @PostMapping("/signup/sendidentifyCode")
-    public boolean sendidentifyCode(@RequestParam String email){
-        return accountservice.identify(email);
+    public boolean sendidentifyCode(@RequestParam String phone){
+        return accountservice.identify(phone);
     }
 
     /**

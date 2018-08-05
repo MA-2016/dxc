@@ -7,8 +7,7 @@ import org.junit.Test;
 public class SendMsgTest{
     @Test
     public void testMsg(){
-        SendMsgUtils.sendMsgTo("15978946435")
-        String result = sendMsgTo("15978946435");
+        String result=SendMsgUtils.sendMsgTo("15978946435",1);
         System.out.println(result);
     }
 }
