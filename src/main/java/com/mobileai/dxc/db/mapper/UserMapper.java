@@ -1,6 +1,7 @@
 package com.mobileai.dxc.db.mapper;
 
 import com.mobileai.dxc.db.pojo.User;
+import com.mobileai.dxc.service.imple.UpdateDriverImple;
 
 import org.apache.ibatis.annotations.*;
 
@@ -16,4 +17,7 @@ public interface UserMapper {
     @Select("select * from user where user_id = #{userId}")
     User selectById(@Param("userId")int userId);
 
+    @Update("update user (#{seller}) where user_id = #{userId}")
+    @Lang(UpdateDriverImple.class)
+    void updateSellerById(User user);
 }

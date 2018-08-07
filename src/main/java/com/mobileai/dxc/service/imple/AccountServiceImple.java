@@ -3,8 +3,10 @@ package com.mobileai.dxc.service.imple;
 import com.mobileai.dxc.db.mapper.AccountMapper;
 import com.mobileai.dxc.db.mapper.SellerMapper;
 import com.mobileai.dxc.db.mapper.UserMapper;
+import com.mobileai.dxc.db.pojo.Account;
 import com.mobileai.dxc.service.AccountService;
 import com.mobileai.dxc.util.MD5Utils;
+import com.mobileai.dxc.util.Result;
 import com.mobileai.dxc.util.SendMsgUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,16 +51,21 @@ public class AccountServiceImple implements AccountService {
     }
 
     @Override
-    public boolean validate(String name, String password, String identifyCode, String randomStr) {
+    public Result validate(String name, String password, String identifyCode, String randomStr) {
         String secretpassword = MD5Utils.md5(password);
+        Account account = accountMapper.selectByName(name);
         if (identifyCode.equals(randomStr)) {
-            if (secretpassword.equals(accountMapper.selectPasswordByUserName(name))) {
-                return true;
+            if (secretpassword.equals(account.getpassword())) {
+                if(account.getseller()){
+                    return new Result(200, "用户登录成功",userMapper.selectById(account.gettargetid()));
+                }else{
+                    return new Result(200,"商家登录成功",sellerMapper.selectById(account.gettargetid()));
+                }
             } else {
-                return false;
+                return new Result(100, "用户名与密码不匹配");
             }
         } else {
-            return false;
+            return new Result(100,"验证码错误");
         }
 
     }

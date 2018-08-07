@@ -1,5 +1,6 @@
 package com.mobileai.dxc.service;
 
+import com.mobileai.dxc.util.Result;
 
 public interface AccountService {
 
@@ -20,6 +21,6 @@ public interface AccountService {
     /**
      * 验证，注意数据库里存储的password字段应该是密码明文的hashcode（安全性）
      */
-    boolean validate(String name, String password,String identifyCode,String randomStr);
+    Result validate(String name, String password,String identifyCode,String randomStr);
 
 }

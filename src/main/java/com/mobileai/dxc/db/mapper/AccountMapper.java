@@ -1,5 +1,7 @@
 package com.mobileai.dxc.db.mapper;
 
+import com.mobileai.dxc.db.pojo.Account;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,10 +15,12 @@ public interface AccountMapper{
     @Select("select password from account where username = #{username}")
     String selectPasswordByUserName( @Param("username")String username);
 
-    @Select("select targetid from account where username = #{username}")
+    @Select("select target_id from account where username = #{username}")
     int selecttargetIdByUserName(@Param("username")String username);
     
     @Select("select seller from account where username = #{username}")
     boolean IsSeller(@Param("username") String username);
     
+    @Select("select * from account where username = #{username}")
+    Account selectByName(@Param("username") String username);
 }

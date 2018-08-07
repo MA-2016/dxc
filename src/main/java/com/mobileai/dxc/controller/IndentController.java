@@ -1,6 +1,5 @@
 package com.mobileai.dxc.controller;
 
-import com.mobileai.dxc.db.mapper.IndentMapper;
 import com.mobileai.dxc.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class IndentController{
     @Autowired
-    CustomerService customservice;
+    private CustomerService customerservice;
 
 
     @PostMapping("/submit")
@@ -25,6 +24,6 @@ public class IndentController{
      * @return 订单id
      */
     public int submitOrder(@RequestParam int userId,@RequestParam int sellerId,@RequestParam int number,@RequestParam long serviceTime,@RequestParam int[] service){
-        return customservice.submitOrder(userId, sellerId, number, serviceTime, service);
+        return customerservice.submitOrder(userId, sellerId, number, serviceTime, service);
     }
 }

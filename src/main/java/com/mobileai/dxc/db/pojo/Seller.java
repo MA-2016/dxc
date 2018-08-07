@@ -69,6 +69,7 @@ public class Seller{
             return this;
         }
 
+        
         public Seller build() {
             return ins;
         }

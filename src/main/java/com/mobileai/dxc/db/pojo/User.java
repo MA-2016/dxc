@@ -7,8 +7,6 @@ public class User {
 
     private int userId;
 
-    private String email;
-
     private String name;
 
     /**
@@ -16,7 +14,7 @@ public class User {
      */
     private boolean certified;
 
-    private String tellphone;
+    private String phone;
 
     private String picName;
 
@@ -36,13 +34,9 @@ public class User {
             return this;
         }
 
-        public Builder setEmail(String email) {
-            ins.email = email;
+        public Builder sePhone(String phone) {
+            ins.phone = phone;
             return this;
-        }
-
-        public String getEmail(){
-            return ins.email;
         }
 
         public Builder setName(String name) {
@@ -52,11 +46,6 @@ public class User {
 
         public Builder setCertified(boolean certified) {
             ins.certified = certified;
-            return this;
-        }
-
-        public Builder setTellphone(String tellphone) {
-            ins.tellphone = tellphone;
             return this;
         }
 

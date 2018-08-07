@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.mobileai.dxc.service.AccountService;
+import com.mobileai.dxc.util.Result;
 import com.mobileai.dxc.util.VerifyUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class AccountController{
     @Autowired
-    AccountService accountservice;
+    private AccountService accountservice;
     /**
      * 用户请求注册
      * @param account 账号
@@ -61,7 +62,7 @@ public class AccountController{
      * @return 返回是否登录成功
      */
     @PostMapping("/login/validate")
-    public boolean validate(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,HttpServletRequest request){
+    public Result validate(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,HttpServletRequest request){
         HttpSession session = request.getSession();
         String randomStr = (String)session.getAttribute("randomStr");
         return accountservice.validate(account, password,identifyCode,randomStr);
