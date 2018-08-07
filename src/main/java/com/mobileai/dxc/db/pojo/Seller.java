@@ -28,51 +28,75 @@ public class Seller{
 
     private String picpath;
 
-    /**
-     * 建造者
-     */
-    public static class Builder {
+    public int getSellerId() {
+        return sellerId;
+    }
 
-        private Seller ins;
+    public void setSellerId(int sellerId) {
+        this.sellerId = sellerId;
+    }
 
-        public Builder() {
-            ins = new Seller();
-        }
+    public String getName() {
+        return name;
+    }
 
-        public Builder setSellerId(int sellerId) {
-            ins.sellerId = sellerId;
-            return this;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public Builder setName(String name) {
-            ins.name = name;
-            return this;
-        }
+    public String getPhone() {
+        return phone;
+    }
 
-        public Builder setPhone(String phone) {
-            ins.phone = phone;
-            return this;
-        }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-        public Builder setlocation(String location) {
-            ins.location = location;
-            return this;
-        }
+    public String getLocation() {
+        return location;
+    }
 
-        public Builder setlongitude(double longitude) {
-            ins.longitude   = longitude;
-            return this;
-        }
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-        public Builder setlatitude(double latitude) {
-            ins.latitude = latitude;
-            return this;
-        }
+    public double getLongitude() {
+        return longitude;
+    }
 
-        
-        public Seller build() {
-            return ins;
-        }
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getServicetype() {
+        return servicetype;
+    }
+
+    public void setServicetype(String servicetype) {
+        this.servicetype = servicetype;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public String getPicpath() {
+        return picpath;
+    }
+
+    public void setPicpath(String picpath) {
+        this.picpath = picpath;
     }
 }

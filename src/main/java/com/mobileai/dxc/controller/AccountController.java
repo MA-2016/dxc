@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 //周恩华负责
 @RestController
 @RequestMapping("/account")
-
 public class AccountController{
     @Autowired
     private AccountService accountservice;

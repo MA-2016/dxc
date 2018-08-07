@@ -32,6 +32,6 @@ public class OrderServiceImple implements OrderService{
      */
     @Override
     public void confirmPayment(int oid){
-        indentMapper.updateOrderStatus(oid);
+   //     indentMapper.updateOrderStatus(oid);
     }
 }

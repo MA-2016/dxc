@@ -1,6 +1,8 @@
 package com.mobileai.dxc.service;
 
+import org.springframework.stereotype.Service;
 
+@Service
 public interface CustomerService {
 
     /**
