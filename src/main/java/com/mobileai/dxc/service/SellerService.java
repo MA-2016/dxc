@@ -7,7 +7,7 @@ public interface SellerService {
 
     /**
      * 通知商家新的订单待接受，由OrderService调用
-     * @param order 订单号
+     * @param order 订单
      */
     void notifyNewOrder(Order order);
 

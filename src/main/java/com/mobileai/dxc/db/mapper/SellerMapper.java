@@ -1,7 +1,7 @@
 package com.mobileai.dxc.db.mapper;
 
 import com.mobileai.dxc.db.pojo.Seller;
-import com.mobileai.dxc.service.imple.UpdateDriverImple;
+import com.mobileai.dxc.service.driver.UpdateDriver;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Lang;
@@ -24,6 +24,6 @@ public interface SellerMapper{
     String selectPhoneById(@Param("sellerId")int sellerId);
 
     @Update("update seller (#{seller}) where seller_id = #{sellerId}")
-    @Lang(UpdateDriverImple.class)
+    @Lang(UpdateDriver.class)
     void updateSellerById(Seller seller);
 }

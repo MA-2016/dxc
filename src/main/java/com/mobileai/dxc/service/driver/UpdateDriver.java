@@ -1,4 +1,4 @@
-package com.mobileai.dxc.service.imple;
+package com.mobileai.dxc.service.driver;
 
 import java.lang.reflect.Field;
 import java.util.regex.Matcher;
@@ -10,7 +10,7 @@ import org.apache.ibatis.mapping.SqlSource;
 import org.apache.ibatis.scripting.xmltags.XMLLanguageDriver;
 import org.apache.ibatis.session.Configuration;
 
-public class UpdateDriverImple extends XMLLanguageDriver {
+public class UpdateDriver extends XMLLanguageDriver {
 
     private final Pattern inPattern = Pattern.compile("\\(#\\{(\\w+)\\}\\)");
 
