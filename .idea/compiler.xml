@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <file url="file://$PROJECT_DIR$/src/main/java/com/mobileai/dxc/service/imple/AccountServiceImple.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/com/mobileai/dxc/service/imple/UpdateInfoImple.java" />
+      <file url="file://$PROJECT_DIR$/src/test/java/com/mobileai/dxc/SellerMapperTest.java" />
+    </excludeFromCompile>
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />

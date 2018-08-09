@@ -26,7 +26,17 @@ public class Seller{
 
     private double score;
 
-    private String picpath;
+    private String picPath;
+
+    private int evaluateNum;
+
+    public int getEvaluateNum() {
+        return evaluateNum;
+    }
+
+    public void setEvaluateNum(int evaluateNum) {
+        this.evaluateNum = evaluateNum;
+    }
 
     public int getSellerId() {
         return sellerId;
@@ -92,11 +102,11 @@ public class Seller{
         this.score = score;
     }
 
-    public String getPicpath() {
-        return picpath;
+    public String getPicPath() {
+        return picPath;
     }
 
-    public void setPicpath(String picpath) {
-        this.picpath = picpath;
+    public void setPicPath(String picPath) {
+        this.picPath = picPath;
     }
 }

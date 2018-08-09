@@ -8,16 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
-
-/*
+//未完成
+/**
 *提交订单后，向商家发送短信，让商家去网站确认
 * 商家拒绝或接受消息后，向客户发送短信
 * */
 
-public class AcceptController {
+public class SellerController {
 
     @Autowired
-    SellerServiceImple sellerService;
+   private SellerServiceImple sellerService;
+
     //用户点击提交订单
     @RequestMapping("/sellerConfirmOrder")
     public  boolean  sellerConfirmOrder(@RequestParam Order order)

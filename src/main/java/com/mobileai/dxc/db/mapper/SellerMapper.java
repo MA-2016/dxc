@@ -6,18 +6,22 @@ import org.apache.ibatis.annotations.*;
 public interface SellerMapper{
     @Insert("insert into seller(phone) values (#{phone}")
     @Options(useGeneratedKeys = true, keyProperty = "seller_id")
-   // @ResultMap("selleralia")
     int addSeller(@Param("phone")String phone);
 
 
-//    @Results(id="selleralia",value=
-//            {
-//                    @Result(column="seller_id", property = "sellerId"),
-//                    @Result(column="service_type", property = "servicetype"),
-//                    @Result(column="pic_path", property = "picpath"),
-//                    @Result(column="phone", property = "phone"),
-//              }
-//    )
     @Select("select phone from seller where seller_id= #{sellerId}")
     String selectPhoneById( @Param("sellerId")int sellerId);
+
+    @Update("update seller set service = #{service} where seller_id = #{sellerId}")
+    void  updateServiceById( @Param("sellerId")int sellerId, @Param("service")String service);
+
+
+    @Select("select service from seller where seller_id= #{sellerId}")
+    String selectServiceById( @Param("sellerId")int sellerId );
+
+   // updateIndexPicture(int sellerId, String picpath)
+   @Update("update seller set pic_path = #{picPath} where seller_id = #{sellerId}")
+    void updatePictureById( @Param("sellerId")int sellerId ,@Param("picPath")String picPath );
+
+
 }
