@@ -2,7 +2,6 @@ package com.mobileai.dxc.db.mapper;
 
 import com.mobileai.dxc.db.pojo.Order;
 import org.apache.ibatis.annotations.*;
-import org.aspectj.weaver.ast.Or;
 
 @Mapper
 public interface IndentMapper {
@@ -26,20 +25,6 @@ public interface IndentMapper {
 
 
     @Select("select * from indent where order_id = #{orderId}")
-    @Results(id="orderalia",value =
-            {
-            @Result(column="seller_id", property = "sellerId"),
-            @Result(column="user_id", property = "userId"),
-            @Result(column="order_id", property = "orderId"),
-            @Result(column="service",property = "service"),
-            @Result(column="total_price",property = "totalPrice"),
-            @Result(column="number",property = "number"),
-            @Result(column="order_time",property ="orderTime" ),
-            @Result(column="service_time",property ="serviceTime" ),
-            @Result(column="order_status",property = "orderStatus"),
-            @Result(column = "refuse_reason",property = "reason")
-            }
-    )
     Order selectOrderByOrderid(@Param("orderId")int orderId);
 
 }
