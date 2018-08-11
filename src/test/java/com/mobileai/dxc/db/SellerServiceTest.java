@@ -6,7 +6,6 @@ import com.mobileai.dxc.db.pojo.Order;
 import com.mobileai.dxc.service.SellerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -25,7 +24,7 @@ public class SellerServiceTest {
     public  void testJunit()
     {
 //
-        Order order =indentMapper.selectOrderByOrderid(1);
+        Order order =indentMapper.selectByOrderid(1);
         System.out.println("in testJunit SellerId"+order.getSellerId());
         System.out.println("in testJunit UserId"+order.getUserId());
         System.out.println("in testJunit  Number"+order.getNumber());

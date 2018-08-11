@@ -28,6 +28,11 @@ public class Seller{
 
     private String picpath;
 
+    /**
+     * 评论人数
+     */
+    private int contentNum;
+
     public int getSellerId() {
         return sellerId;
     }
@@ -98,5 +103,12 @@ public class Seller{
 
     public void setPicpath(String picpath) {
         this.picpath = picpath;
+    }
+
+    public void setContentNum(int contentNum){
+        this.contentNum = contentNum;
+    }
+    public int getContentNum(){
+        return contentNum;
     }
 }

@@ -31,7 +31,16 @@ public class OrderServiceImple implements OrderService{
      * @param oid 订单号
      */
     @Override
-    public void confirmPayment(int oid){
-   //     indentMapper.updateOrderStatus(oid);
+    public void confirmPayment(int oid,int orderStatus){
+        indentMapper.updateOrderStatus(oid,orderStatus);
+    }
+
+    /**
+     * 获取订单信息
+     * @param oid 订单号
+     */
+    @Override
+    public Order getOrderInfo(int orderId){
+        return indentMapper.selectByOrderid(orderId);
     }
 }

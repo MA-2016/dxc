@@ -24,16 +24,14 @@ public class SellerServiceImple implements SellerService {
 
 
 
-
     @Override
     public void notifyNewOrder(Order order) {
         String sellerPhone;
         System.out.println(" in notifyNewOrder SellerId"+order.getSellerId());
         sellerPhone =sellerMapper.selectPhoneById(order.getSellerId());
-        //测试后删除
 
         System.out.println("sellerPhone"+sellerPhone);
-      //  SendMsgUtils.sendMsgTo(sellerPhone,2);
+        SendMsgUtils.sendMsgTo(sellerPhone,2);
 
     }
 
@@ -57,7 +55,7 @@ public class SellerServiceImple implements SellerService {
         int uid=indentMapper.selectUseridByOrderid(oid);
         userPhone=userMapper.selectPhoneById(uid);
         System.out.println("userPhone"+userPhone);
-     //   SendMsgUtils.sendMsgTo(userPhone,4);
+        SendMsgUtils.sendMsgTo(userPhone,4);
 
 
         return new Result(SUCCESS);

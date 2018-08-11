@@ -38,7 +38,7 @@ public class AccountServiceImple implements AccountService {
             if (seller) {
                 targetid = sellerMapper.addSeller(phone);
             } else {
-                targetid = userMapper.addUser(phone);
+                 targetid = userMapper.addUser(phone);
             }
 
             String secretpassword = MD5Utils.md5(password);

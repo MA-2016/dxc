@@ -1,7 +1,6 @@
 package com.mobileai.dxc.util;
 
-import javax.xml.ws.Service;
-import java.util.StringTokenizer;
+
 
 /**
  * Service从网页是数组形式传过来

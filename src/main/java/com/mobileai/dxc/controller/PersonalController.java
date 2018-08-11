@@ -3,6 +3,7 @@ package com.mobileai.dxc.controller;
 import com.mobileai.dxc.db.pojo.Seller;
 import com.mobileai.dxc.db.pojo.User;
 import com.mobileai.dxc.service.UpdateInfo;
+import com.mobileai.dxc.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,8 @@ public class PersonalController {
     @Autowired
     UpdateInfo updateInfo;
 
+    @Autowired
+    UserService userService;
     
     /**
      * 更新商家
@@ -39,6 +42,17 @@ public class PersonalController {
     @GetMapping("/updateuser")
     boolean updateuser(User user){
         return updateuser(user);
+    }
+
+    /**
+     * 获取用户信息
+     * @param userId 
+     * 
+     * @return User
+     */
+    @GetMapping("/getuserInfo")
+    User getUserInfo(int userId){
+        return userService.getUser(userId);
     }
 
 }

@@ -16,8 +16,16 @@ public interface OrderService {
 
     /**
      * 确认已支付，由WxPayService调用
-     * @param oid 订单号
+     * @param orderId 订单号
+     * @param orderStatu 订单状态
      */
-    void confirmPayment(int oid);
+    void confirmPayment(int orderId,int orderStatu);
+
+    /**
+     * 获取订单
+     * @param orderId 订单号
+     * @return 订单信息
+     */
+    Order getOrderInfo(int orderId);
 
 }
