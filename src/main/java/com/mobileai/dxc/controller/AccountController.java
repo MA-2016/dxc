@@ -31,7 +31,7 @@ public class AccountController{
      * @return 返回是否注册成功
      */
     @PostMapping("/signup/register")
-    public boolean register(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,@RequestParam boolean beSeller,HttpServletRequest request){
+    public Result register(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,@RequestParam boolean beSeller,HttpServletRequest request){
         HttpSession session = request.getSession();
         String identifyCode_session = (String)session.getAttribute("identifyCode_session");
         String phone = (String)session.getAttribute("phone");

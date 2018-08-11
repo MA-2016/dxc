@@ -19,5 +19,5 @@ public interface UserMapper {
 
     @Update("update user (#{seller}) where user_id = #{userId}")
     @Lang(UpdateDriver.class)
-    void updateSellerById(User user);
+    void updateUserById(User user);
 }

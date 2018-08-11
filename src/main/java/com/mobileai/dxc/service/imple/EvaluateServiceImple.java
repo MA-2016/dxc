@@ -7,7 +7,10 @@ import com.mobileai.dxc.db.pojo.Seller;
 import com.mobileai.dxc.service.EvaluateService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+//周恩华负责
+@Service
 public class EvaluateServiceImple implements EvaluateService{
     @Autowired
     IndentMapper indentMapper;

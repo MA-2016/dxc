@@ -28,7 +28,7 @@ public class UpdateInfoImple implements UpdateInfo{
 
 	@Override
 	public boolean updateUser(User user) {
-        userMapper.updateSellerById(user);
+        userMapper.updateUserById(user);
 		return true;
 	}
 }

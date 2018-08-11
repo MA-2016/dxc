@@ -31,7 +31,7 @@ public class AccountServiceImple implements AccountService {
     }
 
     @Override
-    public boolean signup(String identifyCode, String name, String password, boolean seller,
+    public Result signup(String identifyCode, String name, String password, boolean seller,
             String identifyCode_session, String phone) {
         int targetid;
         if (identifyCode == identifyCode_session) {
@@ -44,9 +44,9 @@ public class AccountServiceImple implements AccountService {
             String secretpassword = MD5Utils.md5(password);
 
             accountMapper.addAccount(name, secretpassword, seller, targetid);
-            return true;
+            return new Result(200,"注册成功");
         } else {
-            return false;
+            return new Result(100,"验证码不匹配");
         }
     }
 

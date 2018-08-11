@@ -15,10 +15,15 @@ public class AccountMapperTest {
     @Autowired
     public AccountMapper accountmapper;
 
-    @Test
-    public void addAccount () {
-        String password = MD5Utils.md5("271623");
-        accountmapper.addAccount("dxc2", password,false,1341);
-    }
+    // @Test
+    // public void addAccount () {
+    //     String password = MD5Utils.md5("271623");
+    //     accountmapper.addAccount("dxc2", password,false,1341);
+    // }
 
+    @Test
+    public void selectAccount(){
+        String password = accountmapper.selectPasswordByUserName("dxc4");
+        System.out.print(password);
+    }
 }
