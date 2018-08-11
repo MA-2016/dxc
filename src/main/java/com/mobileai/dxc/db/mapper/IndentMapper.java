@@ -13,7 +13,7 @@ public interface IndentMapper {
     int selectOrderidByUserid(@Param("userId")int userId);
 
     @Update("update indent set order_status = #{orderStatus} where order_id = #{orderId}")
-    void updateOrderStatus(@Param("orderStatus") int orderStatus,@Param("orderId")int orderId);
+    void updateOrderStatus(@Param("orderId")int orderId,@Param("orderStatus") int orderStatus);
 
 
     @Select("select user_id from indent where order_id = #{orderId}")
@@ -26,5 +26,8 @@ public interface IndentMapper {
 
     @Select("select * from indent where order_id = #{orderId}")
     Order selectOrderByOrderid(@Param("orderId")int orderId);
+
+    @Select("select order_status from indent where order_id = #{orderId}")
+    int selectStatusByOrderid(@Param("orderId")int orderId);
 
 }

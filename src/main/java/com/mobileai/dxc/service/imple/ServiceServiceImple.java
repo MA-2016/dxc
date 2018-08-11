@@ -20,7 +20,7 @@ public class ServiceServiceImple implements ServiceService {
 
 
     @Override
-    public void serviceInit(Service[] services, int sellerId) {
+    public boolean  serviceInit(Service[] services, int sellerId) {
 
         int[] ServiceIntArray =new int[services.length];
         int i=0;
@@ -37,32 +37,35 @@ public class ServiceServiceImple implements ServiceService {
         String serviceStr =intArray2String(ServiceIntArray);
         sellerMapper.updateServiceById(sellerId,serviceStr);
 
-
+        return true;
     }
 
     @Override
-    public void updateService(int serviceId, int sellerId, String description) {
+    public boolean updateService(int serviceId, int sellerId, String description) {
 
         serviceMapper.updateDescriptionById(serviceId,sellerId,description);
 
+        return true;
     }
 
     @Override
-    public void updateService(int serviceId, int sellerId, double price) {
+    public boolean updateService(int serviceId, int sellerId, double price) {
 
         serviceMapper.updatePriceById(serviceId,sellerId,price);
+        return true;
 
     }
 
-    public void updateService(int serviceId, int sellerId, double price, String description){
+    public boolean updateService(int serviceId, int sellerId, double price, String description){
 
         serviceMapper.updateDescriptionById(serviceId,sellerId,description);
         serviceMapper.updatePriceById(serviceId,sellerId,price);
+        return true;
 
     }
 
     @Override
-    public void deleteService(int serviceId, int sellerId) {
+    public boolean deleteService(int serviceId, int sellerId) {
         //取得原来的字符串
         String preServiceStr = sellerMapper.selectServiceById( sellerId );
         String ServiceStr = deleteIntFormString( serviceId , preServiceStr );
@@ -73,12 +76,16 @@ public class ServiceServiceImple implements ServiceService {
         //修改数据库service表
         serviceMapper.deleteServiceById(serviceId,sellerId);
 
+        return true;
+
     }
 
     @Override
-    public void addService(int serviceId, int sellerId, String description, double price) {
+    public boolean addService(int serviceId, int sellerId, String description, double price) {
 
         serviceMapper.addService(serviceId,sellerId,description,price);
+
+        return true;
 
     }
 }

@@ -11,16 +11,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static com.mobileai.dxc.util.StatusCode.SUCCESS;
+import static com.mobileai.dxc.util.StatusUtils.getOrderAcceptStatus;
+import static com.mobileai.dxc.util.StatusUtils.getOrderRefuseStatus;
 
 @Service
 public class SellerServiceImple implements SellerService {
 
     @Autowired
-    UserMapper userMapper;
+     private UserMapper userMapper;
     @Autowired
-    IndentMapper indentMapper;
+    private IndentMapper indentMapper;
     @Autowired
-    SellerMapper sellerMapper;
+    private SellerMapper sellerMapper;
 
 
 
@@ -40,6 +42,11 @@ public class SellerServiceImple implements SellerService {
     @Override
     public Result acceptOrder(int oid) {
         String userPhone;
+        int Statuscode;
+
+        Statuscode=indentMapper.selectStatusByOrderid(oid);
+        Statuscode=getOrderAcceptStatus(Statuscode);
+        indentMapper.updateOrderStatus(oid,Statuscode);
 
         int uid=indentMapper.selectUseridByOrderid(oid);
         userPhone=userMapper.selectPhoneById(uid);
@@ -51,6 +58,11 @@ public class SellerServiceImple implements SellerService {
     @Override
     public Result refuseOrder(int oid, String reason) {
         String userPhone;
+        int Statuscode;
+
+        Statuscode=indentMapper.selectStatusByOrderid(oid);
+        Statuscode=getOrderRefuseStatus(Statuscode);
+        indentMapper.updateOrderStatus(oid,Statuscode);
 
         indentMapper.updateRefuseReasonByOrderid(reason,oid);
 

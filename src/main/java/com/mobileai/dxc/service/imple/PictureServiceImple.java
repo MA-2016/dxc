@@ -43,9 +43,9 @@ public class PictureServiceImple implements PictureService {
     public void deleteServicePicture(int serviceId, int sellerId, String picture) {
         //从数据库取得所有picture字符串
         String allPicture=serviceMapper.selectPictureById(serviceId,sellerId);
-        //删除子字符串
+
         allPicture=deleteSubString(picture,allPicture);
-        //更新数据库picture字段
+
         serviceMapper.updatePictureById(serviceId,sellerId,allPicture);
 
     }
@@ -55,21 +55,21 @@ public class PictureServiceImple implements PictureService {
         //从数据库取出所有的picture；
         String allPicture=serviceMapper.selectPictureById(serviceId,sellerId);
 
-        //加入picture
+
         allPicture=addSubString(picture,allPicture);
-        //更新数据库picture字段
+
         serviceMapper.updatePictureById(serviceId,sellerId,allPicture);
 
     }
     @Override
     public void updateServicePicture(int serviceId, int sellerId, String prepicture,String nowpicture) {
-        //从数据库取出所有的picture；
+
         String allPicture=serviceMapper.selectPictureById(serviceId,sellerId);
 
-        //调用方法吧pre换成now
+
         allPicture=deleteSubString(prepicture,allPicture);
         allPicture=addSubString(nowpicture,allPicture);
-        //更新数据库picture字段
+
         serviceMapper.updatePictureById(serviceId,sellerId,allPicture);
 
     }
