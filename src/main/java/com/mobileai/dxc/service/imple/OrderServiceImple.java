@@ -3,6 +3,7 @@ package com.mobileai.dxc.service.imple;
 import com.mobileai.dxc.db.mapper.IndentMapper;
 import com.mobileai.dxc.db.pojo.Order;
 import com.mobileai.dxc.service.OrderService;
+import com.mobileai.dxc.service.SellerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,11 @@ public class OrderServiceImple implements OrderService{
 
     @Autowired
     private IndentMapper indentMapper;
-    
+
+    @Autowired
+    private SellerService sellerService;
     /**
-     * 提交新订单，由CustomerService调用
+     * 提交新订单，由UserService调用
      * @param 订单信息
      * 
      * @return 订单号
@@ -23,7 +26,7 @@ public class OrderServiceImple implements OrderService{
     @Override 
     public int submitOrder(Order order){
         indentMapper.createOrder(order.getUserId(),order.getSellerId(),order.getNumber(),order.getServiceTime(),order.getService());
-
+        sellerService.notifyNewOrder(order);
         return indentMapper.selectOrderidByUserid(order.getUserId());
     }   
 

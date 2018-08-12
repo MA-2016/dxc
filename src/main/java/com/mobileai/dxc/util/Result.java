@@ -12,7 +12,7 @@ public class Result {
 
     private String description;
 
-    private Object data;
+    public Object data;
 
     public Result(int statusCode) { this(statusCode, null, null); }
 

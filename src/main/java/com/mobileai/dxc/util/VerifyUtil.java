@@ -1,93 +1,103 @@
 package com.mobileai.dxc.util;
 
+import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
-
-/**
- * 图片验证码
- * 
- */
-
-
 public class VerifyUtil {
-    // 验证码字符集
-    private static final char[] chars = {'2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e',
-            'f', 'g', 'h', 'i', 'j', 'k', 'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U',
-            'V', 'W', 'X', 'Y', 'Z' };
-    // 字符数量
-    private static final int SIZE = 4;
-    // 干扰线数量
-    private static final int LINES = 5;
-    // 宽度
-    private static final int WIDTH = 80;
-    // 高度
-    private static final int HEIGHT = 40;
-    // 字体大小
-    private static final int FONT_SIZE = 30;
 
-    /**
-     * 生成随机验证码及图片 Object[0]：验证码字符串； Object[1]：验证码图片。
-     */
-    public static Object[] createImage() {
-        StringBuffer sb = new StringBuffer();
-        // 1.创建空白图片
-        BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-        // 2.获取图片画笔
-        Graphics graphic = image.getGraphics();
-        // 3.设置画笔颜色
-        graphic.setColor(Color.LIGHT_GRAY);
-        // 4.绘制矩形背景
-        graphic.fillRect(0, 0, WIDTH, HEIGHT);
-        // 5.画随机字符
-        Random ran = new Random();
-        for (int i = 0; i < SIZE; i++) {
-            // 取随机字符索引
-            int n = ran.nextInt(chars.length);
-            // 设置随机颜色
-            graphic.setColor(getRandomColor());
-            // 设置字体大小
-            graphic.setFont(new Font(null, Font.BOLD + Font.ITALIC, FONT_SIZE));
-            // 画字符
-            graphic.drawString(chars[n] + "", i * WIDTH / SIZE, HEIGHT * 2 / 3);
-            // 记录字符
-            sb.append(chars[n]);
-        }
-        // 6.画干扰线
-        for (int i = 0; i < LINES; i++) {
-            // 设置随机颜色
-            graphic.setColor(getRandomColor());
-            // 随机画线
-            graphic.drawLine(ran.nextInt(WIDTH), ran.nextInt(HEIGHT), ran.nextInt(WIDTH), ran.nextInt(HEIGHT));
-        }
-        // 7.返回验证码和图片
-        // return new Object[]{sb.toString(), image};
+    public static Object[] creatImage() {
+        int width = 100, height = 28;
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.getGraphics(); // 创建Graphics对象，其作用于画笔
+        Graphics2D g2d = (Graphics2D) g; // 创建Grapchics2D对象
+        Random random = new Random();
+        Font font = new Font("华文宋体", Font.BOLD, 19);
+        g.setColor(getRandColor(200, 250));
+        g.fillRect(0, 0, width, height);
+        g.setFont(font);
+        g.setColor(getRandColor(180, 200));
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        // BufferedImage image =
-        // imageCaptchaService.getImageChallengeForID(request.getRequestedSessionId());
-        try {
-            ImageIO.write(image, "jpeg", baos);
-        } catch (IOException e) {
-            e.printStackTrace();
+        // 绘制随机线条
+        for (int i = 0; i < 10; i++) {
+            g2d.setColor(getRandColor(120, 200));
+            int x1 = random.nextInt(width);
+            int x2 = random.nextInt(width);
+            int y1 = random.nextInt(height);
+            int y2 = random.nextInt(height);
+            g2d.drawLine(x1, y1, x2, y2);
+            ;
         }
-        return new Object[] { sb.toString(), baos.toByteArray() };
 
+        // 绘制验证码
+        String sRand = "";
+        String ctmp = "";
+        for (int i = 0; i < 4; i++) {
+            // 根据需要该段生成汉字的代码可注释掉
+            // 生成汉字
+            String[] rBase = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
+            // 生成第一位区码
+            int r1 = random.nextInt(3) + 11;
+            String str_r1 = rBase[r1];
+            // 生成第二位区码
+            int r2;
+            if (r1 == 13) {
+                r2 = random.nextInt(7);
+            } else {
+                r2 = random.nextInt(16);
+            }
+            String str_r2 = rBase[r2];
+            // 生成第一位位码
+            int r3 = random.nextInt(6) + 10;
+            String str_r3 = rBase[r3];
+            // 生成第二位位码
+            int r4;
+            if (r3 == 10) {
+                r4 = random.nextInt(15) + 1;
+            } else if (r3 == 15) {
+                r4 = random.nextInt(15);
+            } else {
+                r4 = random.nextInt(16);
+            }
+            String str_r4 = rBase[r4];
+            // 将生成的机内码转换为汉字
+            byte[] bytes = new byte[2];
+            // 将生成的区码保存到字节数组的第一个元素中
+            String str_12 = str_r1 + str_r2;
+            int tempLow = Integer.parseInt(str_12, 16);
+            bytes[0] = (byte) tempLow;
+            // 将生成的位码保存到字节数组的第二个元素中
+            String str_34 = str_r3 + str_r4;
+            int tempHigh = Integer.parseInt(str_34, 16);
+            bytes[1] = (byte) tempHigh;
+            ctmp = new String(bytes);// 该段生成汉字的代码可注释掉
+
+            sRand += ctmp;
+            Color color = new Color(20 + random.nextInt(110), 20 + random.nextInt(110), 20 + random.nextInt(110));
+            g.setColor(color);
+            g.drawString(ctmp, 19 * i + 19, 19);
+        }
+
+        g.dispose();
+
+        return new Object[] { sRand, image };
     }
 
-    /**
-     * 随机取色
-     */
-    public static Color getRandomColor() {
-        Random ran = new Random();
-        Color color = new Color(ran.nextInt(256), ran.nextInt(256), ran.nextInt(256));
-        return color;
+    public static Color getRandColor(int s, int e) {
+        Random random = new Random();
+        if (s > 255)
+            s = 91;
+        if (e > 255)
+            e = 97;
+        int r, g, b;
+        r = s + random.nextInt(e - s);
+        g = s + random.nextInt(e - s);
+        b = s + random.nextInt(e - s);
+        return new Color(r, g, b);
     }
 }

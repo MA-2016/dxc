@@ -1,7 +1,13 @@
 package com.mobileai.dxc.controller;
 
 
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.mobileai.dxc.service.AccountService;
@@ -9,6 +15,7 @@ import com.mobileai.dxc.util.Result;
 import com.mobileai.dxc.util.VerifyUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,17 +70,25 @@ public class AccountController{
     @PostMapping("/login/validate")
     public Result validate(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,HttpServletRequest request){
         HttpSession session = request.getSession();
-        String randomStr = (String)session.getAttribute("randomStr");
+        String randomStr = (String)session.getAttribute("randCheckCode");
         return accountservice.validate(account, password,identifyCode,randomStr);
     }
     
-    @PostMapping("/login/getidentifyCode")
-    public byte[] getidentifyCode(HttpServletRequest request){
-        Object[] objs = VerifyUtil.createImage();
+    @GetMapping("/login/getidentifyCode")
+    public void getidentifyCode(HttpServletRequest request,HttpServletResponse response) throws IOException{
+        //设置不缓存图片
+        response.setHeader("Pragma", "No-cache");
+        response.setHeader("Cache-Control", "No-cache");
+        response.setDateHeader("Expires", 0);
+        
+        //指定生成的响应图片
+        response.setContentType("image/jpeg");
+        
+        Object[] objs = VerifyUtil.creatImage();
         HttpSession session  = request.getSession();
-        session.setAttribute("randomStr", (String)objs[0]);
+        session.setAttribute("randCheckCode", (String)objs[0]);
+        ImageIO.write((RenderedImage)objs[1], "JPEG", response.getOutputStream());
 
-        return (byte[])objs[1];
     }
 
 }

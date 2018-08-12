@@ -8,7 +8,7 @@ import com.mobileai.dxc.db.pojo.Order;
 public interface OrderService {
 
     /**
-     * 提交新订单，由CustomerService调用
+     * 提交新订单，由UserService调用
      * @param 订单信息
      * @return 订单号
      */
