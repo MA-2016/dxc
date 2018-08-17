@@ -1,5 +1,7 @@
 package com.mobileai.dxc.service.imple;
 
+import java.util.Date;
+
 import com.mobileai.dxc.db.mapper.AccountMapper;
 import com.mobileai.dxc.db.mapper.SellerMapper;
 import com.mobileai.dxc.db.mapper.UserMapper;
@@ -31,22 +33,38 @@ public class AccountServiceImple implements AccountService {
     }
 
     @Override
-    public Result signup(String identifyCode, String name, String password, boolean seller,
+    public Result signup(String identifyCode, String name, String password, int identifyMark,
             String identifyCode_session, String phone) {
-        int targetid;
+        int targetId;
         if (identifyCode == identifyCode_session) {
-            if (seller) {
-                targetid = sellerMapper.addSeller(phone);
-            } else {
-                 targetid = userMapper.addUser(phone);
+            switch (identifyMark) {
+            case 1:
+                targetId = sellerMapper.addSeller(phone);
+                break;
+            case 2:
+                targetId = userMapper.addUser(phone);
+                break;
+            case 3:
+                targetId = 0;
+                break;
+            default:
+                return new Result(100, "注册失败");
             }
 
             String secretpassword = MD5Utils.md5(password);
 
-            accountMapper.addAccount(name, secretpassword, seller, targetid);
-            return new Result(200,"注册成功");
+            Account account = new Account();
+            account.setName(name);
+            account.setPassword(secretpassword);
+            account.setidentifyMark(identifyMark);
+            account.setcreateTime(new Date());
+            account.setupdateTime(new Date());
+            account.settargetId(targetId);
+
+            accountMapper.addAccount(account);
+            return new Result(200, "注册成功");
         } else {
-            return new Result(100,"验证码不匹配");
+            return new Result(100, "验证码不匹配");
         }
     }
 
@@ -56,16 +74,21 @@ public class AccountServiceImple implements AccountService {
         Account account = accountMapper.selectByName(name);
         if (identifyCode.equals(randomStr)) {
             if (secretpassword.equals(account.getpassword())) {
-                if(account.getseller()){
-                    return new Result(200, "用户登录成功",userMapper.selectById(account.gettargetid()));
-                }else{
-                    return new Result(200,"商家登录成功",sellerMapper.selectById(account.gettargetid()));
+                switch (account.getidentifyMark()) {
+                case 1:
+                    return new Result(200, "商家登录成功", sellerMapper.selectById(account.gettargetId()));
+                case 2:
+                    return new Result(200, "用户登录成功", userMapper.selectById(account.gettargetId()));
+                case 3:
+                    return new Result(200, "管理员登录成功");
+                default:
+                    return new Result(100, "传参出错");
                 }
             } else {
                 return new Result(100, "用户名与密码不匹配");
             }
         } else {
-            return new Result(100,"验证码错误");
+            return new Result(100, "验证码错误");
         }
 
     }

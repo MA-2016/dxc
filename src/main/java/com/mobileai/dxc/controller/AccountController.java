@@ -38,11 +38,11 @@ public class AccountController{
      * @return 返回是否注册成功
      */
     @PostMapping("/signup/register")
-    public Result register(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,@RequestParam boolean beSeller,HttpServletRequest request){
+    public Result register(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,@RequestParam int identifyMark,HttpServletRequest request){
         HttpSession session = request.getSession();
         String identifyCode_session = (String)session.getAttribute("identifyCode_session");
         String phone = (String)session.getAttribute("phone");
-        return accountservice.signup(identifyCode, account, password, beSeller,identifyCode_session,phone);
+        return accountservice.signup(identifyCode, account, password, identifyMark,identifyCode_session,phone);
     }
 
     /**
@@ -88,7 +88,6 @@ public class AccountController{
         HttpSession session  = request.getSession();
         session.setAttribute("randCheckCode", (String)objs[0]);
         ImageIO.write((RenderedImage)objs[1], "JPEG", response.getOutputStream());
-
     }
 
 }

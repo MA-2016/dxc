@@ -1,5 +1,7 @@
 package com.mobileai.dxc.db.pojo;
 
+import java.util.Date;
+
 import lombok.Data;
 
 /**
@@ -10,34 +12,45 @@ import lombok.Data;
 @Data
 public class Account {
 
-    private int accountId;
-    private String username;
+    private Integer accountId;
+    private String name;
     private String password;
-    private Boolean seller;
-    private int targetid;
+    private Integer identifyMark;
+    private Integer targetId;
 
-    public void setAccountId(int accountId) {
+    private Date createTime;
+    private Date updateTime;
+
+
+    public void setAccountId(Integer accountId) {
         this.accountId = accountId;
-        ;
     }
 
-    public void setUserName(String UserName) {
-        this.username = UserName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setseller(boolean seller) {
-        this.seller = seller;
+    public void setidentifyMark(Integer identifyMark) {
+        this.identifyMark  = identifyMark;
     }
 
-    public void settargetid(int targetid) {
-        this.targetid = targetid;
+    public void settargetId(Integer targetId) {
+        this.targetId = targetId;
     }
 
-    public int getid() {
+    public void setcreateTime(Date createTime){
+        this.createTime = createTime;
+    }
+
+    public void setupdateTime(Date updateTime){
+        this.updateTime = updateTime;
+    }
+
+    public Integer getid() {
         return this.accountId;
     }
 
@@ -45,11 +58,19 @@ public class Account {
         return this.password;
     }
 
-    public boolean getseller() {
-        return this.seller;
+    public Integer getidentifyMark() {
+        return this.identifyMark;
     }
 
-    public int gettargetid() {
-        return this.targetid;
+    public Integer gettargetId() {
+        return this.targetId;
+    }
+
+    public Date getcreateTime(){
+        return this.createTime;
+    }
+
+    public Date getupdateTime(){
+        return this.updateTime;
     }
 }
