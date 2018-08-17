@@ -24,10 +24,10 @@ public class EvaluateServiceImple implements EvaluateService{
     @Override
     public boolean submitEvaluation(int sellerId,int userId,int orderId,int starLevel,String content){
         Seller seller = sellerMapper.selectById(sellerId);
-        int newcontenNum = seller.getContentNum()+1;
-        double newscore = (seller.getScore()*seller.getContentNum()+starLevel)/newcontenNum;
+        int newEvaluate = seller.getEvaluateNum()+1;
+        double newscore = (seller.getScore()*seller.getEvaluateNum()+starLevel)/newEvaluate;
 
-        seller.setContentNum(newcontenNum);
+        seller.setEvaluateNum(newEvaluate);
         seller.setScore(newscore);
 
         sellerMapper.updateSellerById(seller);

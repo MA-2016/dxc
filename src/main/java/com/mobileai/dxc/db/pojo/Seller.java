@@ -31,7 +31,7 @@ public class Seller{
     /**
      * 评论人数
      */
-    private int contentNum;
+    private int evaluateNum;
 
     public int getSellerId() {
         return sellerId;
@@ -105,10 +105,10 @@ public class Seller{
         this.picpath = picpath;
     }
 
-    public void setContentNum(int contentNum){
-        this.contentNum = contentNum;
+    public void setEvaluateNum(int evaluateNum){
+        this.evaluateNum = evaluateNum;
     }
-    public int getContentNum(){
-        return contentNum;
+    public int getEvaluateNum(){
+        return evaluateNum;
     }
 }

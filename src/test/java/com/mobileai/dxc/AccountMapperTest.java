@@ -20,23 +20,22 @@ public class AccountMapperTest {
 
     @Test
     public void addAccount() {
-        String password = MD5Utils.md5("271623");
+        String password = MD5Utils.md5("4324234");
         
         Account account = new Account();
-        account.setName("dxc");
+        account.setName("dxc1");
         account.setPassword(password);
         account.setidentifyMark(1);
         account.setcreateTime(new Date());
         account.setupdateTime(new Date());
         account.settargetId(12);
-
         accountmapper.addAccount(account);
 
     }
 
     @Test
     public void selectAccount() {
-        String password = accountmapper.selectPasswordByUserName("dxc4");
+        String password = accountmapper.selectPasswordByUserName("dxc");
         System.out.print(password);
     }
 }
