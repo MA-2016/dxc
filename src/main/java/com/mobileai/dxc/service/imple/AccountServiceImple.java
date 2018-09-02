@@ -6,6 +6,8 @@ import com.mobileai.dxc.db.mapper.AccountMapper;
 import com.mobileai.dxc.db.mapper.SellerMapper;
 import com.mobileai.dxc.db.mapper.UserMapper;
 import com.mobileai.dxc.db.pojo.Account;
+import com.mobileai.dxc.db.pojo.Seller;
+import com.mobileai.dxc.db.pojo.User;
 import com.mobileai.dxc.service.AccountService;
 import com.mobileai.dxc.util.MD5Utils;
 import com.mobileai.dxc.util.Result;
@@ -39,10 +41,18 @@ public class AccountServiceImple implements AccountService {
         if (identifyCode == identifyCode_session) {
             switch (identifyMark) {
             case 1:
-                targetId = sellerMapper.addSeller(phone);
+                Seller seller = new Seller();
+                seller.setPhone(phone);
+                seller.setcreateTime(new Date());
+                seller.setupdateTime(new Date());
+                targetId = sellerMapper.addSeller(seller);
                 break;
             case 2:
-                targetId = userMapper.addUser(phone);
+                User user = new User();
+                user.setPhone(phone);
+                user.setcreateTime(new Date());
+                user.setupdateTime(new Date());
+                targetId = userMapper.addUser(user);
                 break;
             case 3:
                 targetId = 0;

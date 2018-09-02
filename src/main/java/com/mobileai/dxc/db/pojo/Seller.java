@@ -1,6 +1,9 @@
 package com.mobileai.dxc.db.pojo;
 
+import java.util.Date;
+
 import lombok.Data;
+
 
 @Data
 public class Seller{
@@ -22,7 +25,7 @@ public class Seller{
      * 服务类型
      */
 
-    private String servicetype;
+    private String service;
 
     private double score;
 
@@ -32,6 +35,10 @@ public class Seller{
      * 评论人数
      */
     private int evaluateNum;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public int getSellerId() {
         return sellerId;
@@ -81,12 +88,12 @@ public class Seller{
         this.latitude = latitude;
     }
 
-    public String getServicetype() {
-        return servicetype;
+    public String getService() {
+        return service;
     }
 
-    public void setServicetype(String servicetype) {
-        this.servicetype = servicetype;
+    public void setService(String service) {
+        this.service = service;
     }
 
     public double getScore() {
@@ -110,5 +117,22 @@ public class Seller{
     }
     public int getEvaluateNum(){
         return evaluateNum;
+    }
+
+    public void setcreateTime(Date createTime){
+        this.createTime = createTime;
+    }
+
+    public void setupdateTime(Date updateTime){
+        this.updateTime = updateTime;
+    }
+
+    
+    public Date getcreateTime(){
+        return this.createTime;
+    }
+
+    public Date getupdateTime(){
+        return this.updateTime;
     }
 }

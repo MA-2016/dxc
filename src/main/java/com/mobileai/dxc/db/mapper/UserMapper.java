@@ -7,9 +7,8 @@ import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
-    @Insert("insert into user(phone) values (#{phone}")
-    @Options(useGeneratedKeys = true, keyProperty = "user_id")
-    int addUser(@Param("phone")String phone);
+    @Insert("insert into user(phone,create_time,update_time) values (#{user.phone},#{user.createTime},#{user.updateTime})")
+    int addUser(@Param("user") User user);
 
     @Select("select phone from user where user_id = #{userId}")
     String selectPhoneById( @Param("userId")int userId);

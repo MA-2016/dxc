@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -15,7 +15,7 @@ public class ImageUtil {
     private static final SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
     private static final Random r = new Random();
 
-    public static String generateThumbnail(CommonsMultipartFile thumbnail, String targetAddr) {
+    public static String generateThumbnail(MultipartFile thumbnail, String targetAddr) {
         String realFileName = getRandomFileName();
         String extension = getFileExtension(thumbnail);
 
@@ -49,7 +49,7 @@ public class ImageUtil {
      * @param thumbnail
      * @return 
      */
-    private static String getFileExtension(CommonsMultipartFile thumbnail) {
+    private static String getFileExtension(MultipartFile thumbnail) {
         String originalFileName = thumbnail.getOriginalFilename();
         return originalFileName.substring(originalFileName.lastIndexOf("."));
     }

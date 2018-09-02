@@ -9,9 +9,8 @@ import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface SellerMapper {
-    @Insert("insert into seller(phone) values (#{phone}")
-    @Options(useGeneratedKeys = true, keyProperty = "seller_id")
-    int addSeller(@Param("phone") String phone);
+    @Insert("insert into seller(phone,create_time,update_time) values (#{seller.phone},#{seller.createTime},#{seller.updateTime})")
+    int addSeller(@Param("seller") Seller seller);
 
     @Select("select phone from seller where seller_id= #{sellerId}")
     String selectPhoneById(@Param("sellerId") int sellerId);
@@ -25,4 +24,6 @@ public interface SellerMapper {
     @Update("update seller (#{seller}) where seller_id = #{sellerId}")
     @Lang(UpdateDriver.class)
     void updateSellerById(Seller seller);
+    @Select("select service from seller where seller_id= #{sellerId}")
+    String selectServiceById(@Param("sellerId")int  sellerId);
 }

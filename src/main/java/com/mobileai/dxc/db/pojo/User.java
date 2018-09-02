@@ -1,5 +1,7 @@
 package com.mobileai.dxc.db.pojo;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -17,6 +19,10 @@ public class User {
     private String phone;
 
     private String picName;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     /**
      * 建造者
@@ -58,6 +64,22 @@ public class User {
             return ins;
         }
 
+    }
+    public void setcreateTime(Date createTime){
+        this.createTime = createTime;
+    }
+
+    public void setupdateTime(Date updateTime){
+        this.updateTime = updateTime;
+    }
+
+    
+    public Date getcreateTime(){
+        return this.createTime;
+    }
+
+    public Date getupdateTime(){
+        return this.updateTime;
     }
 
 }
