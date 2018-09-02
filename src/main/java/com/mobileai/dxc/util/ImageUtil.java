@@ -6,10 +6,6 @@ import java.util.Date;
 import java.util.Random;
 
 import org.springframework.web.multipart.MultipartFile;
-<<<<<<< HEAD
-=======
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
->>>>>>> aa75e273406ff589e635bf92d29a8deed1d78db0
 
 import net.coobird.thumbnailator.Thumbnails;
 

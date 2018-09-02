@@ -54,7 +54,8 @@ public class AccountController{
     public boolean sendidentifyCode(@RequestParam String phone,HttpServletRequest request){
         HttpSession session = request.getSession();
         session.setAttribute("phone", phone);
-        session.setAttribute("identifyCode_session", accountservice.identify(phone));
+        session.setAttribute("identifyCode_session", "123456");
+        // session.setAttribute("identifyCode_session", accountservice.identify(phone));
         System.out.println(session.getAttribute("identifyCode_session"));
         return true;
     }

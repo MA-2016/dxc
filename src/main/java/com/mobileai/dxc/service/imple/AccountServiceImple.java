@@ -42,23 +42,20 @@ public class AccountServiceImple implements AccountService {
         if (identifyCode.equals(identifyCode_session)) {
             switch (identifyMark) {
             case 1:
-<<<<<<< HEAD
                 Seller seller = new Seller();
                 seller.setPhone(phone);
                 seller.setcreateTime(new Date());
                 seller.setupdateTime(new Date());
-                targetId = sellerMapper.addSeller(seller);
-=======
-                System.out.println("phone"+phone);
-                targetId = sellerMapper.addSeller(phone);
->>>>>>> aa75e273406ff589e635bf92d29a8deed1d78db0
+                sellerMapper.addSeller(seller);
+                targetId = seller.getSellerId();
                 break;
             case 2:
                 User user = new User();
                 user.setPhone(phone);
                 user.setcreateTime(new Date());
                 user.setupdateTime(new Date());
-                targetId = userMapper.addUser(user);
+                userMapper.addUser(user);
+                targetId = user.getUserId();
                 break;
             case 3:
                 targetId = 0;
