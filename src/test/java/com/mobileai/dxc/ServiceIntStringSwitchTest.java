@@ -1,22 +1,19 @@
 package com.mobileai.dxc;
 
-import com.mobileai.dxc.util.ServiceIntStringSwitch;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
-import static com.mobileai.dxc.util.ServiceIntStringSwitch.intArray2String;
-import static com.mobileai.dxc.util.ServiceIntStringSwitch.string2IntArray;
+import static com.mobileai.dxc.util.IntStringUtils.string2IntArray;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ServiceIntStringSwitchTest {
 
-    ServiceIntStringSwitch AISswitch;
+
 
     int[] intarray={2,3,1};
     @Test

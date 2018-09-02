@@ -5,3 +5,4 @@ target/
 .project
 mvnw
 mvnw.cmd
+.workspace.xml

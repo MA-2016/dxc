@@ -5,8 +5,9 @@ import com.mobileai.dxc.db.pojo.Order;
 import com.mobileai.dxc.db.pojo.User;
 import com.mobileai.dxc.service.OrderService;
 import com.mobileai.dxc.service.UserService;
-import com.mobileai.dxc.util.ServiceIntStringSwitch;
 
+
+import com.mobileai.dxc.util.IntStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,7 @@ public class UserServiceImple implements UserService{
         order.setSellerId(sellerId);
         order.setNumber(number);
         order.setServiceTime(serviceTime);
-        order.setService(ServiceIntStringSwitch.intArray2String(service));
+        order.setService(IntStringUtils.intArray2String(service));
 
         return createorder.submitOrder(order);
     }

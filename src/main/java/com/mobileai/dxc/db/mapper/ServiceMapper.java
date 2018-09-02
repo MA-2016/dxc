@@ -1,8 +1,15 @@
 package com.mobileai.dxc.db.mapper;
 
 import com.mobileai.dxc.db.pojo.Provision;
+<<<<<<< HEAD
 import com.mobileai.dxc.service.driver.UpdateDriver;
 import org.apache.ibatis.annotations.*;
+=======
+import com.mobileai.dxc.db.pojo.Seller;
+import com.mobileai.dxc.service.driver.UpdateDriver;
+import org.apache.ibatis.annotations.*;
+import org.hamcrest.StringDescription;
+>>>>>>> aa75e273406ff589e635bf92d29a8deed1d78db0
 
 import java.util.List;
 
