@@ -36,9 +36,11 @@ public class AccountServiceImple implements AccountService {
     public Result signup(String identifyCode, String name, String password, int identifyMark,
             String identifyCode_session, String phone) {
         int targetId;
-        if (identifyCode == identifyCode_session) {
+
+        if (identifyCode.equals(identifyCode_session)) {
             switch (identifyMark) {
             case 1:
+                System.out.println("phone"+phone);
                 targetId = sellerMapper.addSeller(phone);
                 break;
             case 2:

@@ -22,7 +22,7 @@ public class Seller{
      * 服务类型
      */
 
-    private String servicetype;
+    private String service;
 
     private double score;
 
@@ -81,12 +81,12 @@ public class Seller{
         this.latitude = latitude;
     }
 
-    public String getServicetype() {
-        return servicetype;
+    public String getService() {
+        return service;
     }
 
-    public void setServicetype(String servicetype) {
-        this.servicetype = servicetype;
+    public void setService(String service) {
+        this.service = service;
     }
 
     public double getScore() {

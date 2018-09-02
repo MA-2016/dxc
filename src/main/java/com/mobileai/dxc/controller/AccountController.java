@@ -1,7 +1,6 @@
 package com.mobileai.dxc.controller;
 
 
-import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
 
@@ -33,16 +32,15 @@ public class AccountController{
      * @param account 账号
      * @param password 密码
      * @param identifyCode 验证码
-     * @param beSeller  是否是商家
-     * 
+     * @param  identifyMark 注册身份 1是seller 2是user
      * @return 返回是否注册成功
      */
     @PostMapping("/signup/register")
-    public Result register(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,@RequestParam int identifyMark,HttpServletRequest request){
+    public String register(@RequestParam String account,@RequestParam String password,@RequestParam String identifyCode,@RequestParam int identifyMark,HttpServletRequest request){
         HttpSession session = request.getSession();
         String identifyCode_session = (String)session.getAttribute("identifyCode_session");
         String phone = (String)session.getAttribute("phone");
-        return accountservice.signup(identifyCode, account, password, identifyMark,identifyCode_session,phone);
+        return accountservice.signup(identifyCode, account, password, identifyMark,identifyCode_session,phone).toString();
     }
 
     /**
@@ -51,11 +49,13 @@ public class AccountController{
      * 
      * @return 返回发送短信成功
      */
+
     @PostMapping("/signup/sendidentifyCode")
     public boolean sendidentifyCode(@RequestParam String phone,HttpServletRequest request){
         HttpSession session = request.getSession();
         session.setAttribute("phone", phone);
         session.setAttribute("identifyCode_session", accountservice.identify(phone));
+        System.out.println(session.getAttribute("identifyCode_session"));
         return true;
     }
 
@@ -73,7 +73,8 @@ public class AccountController{
         String randomStr = (String)session.getAttribute("randCheckCode");
         return accountservice.validate(account, password,identifyCode,randomStr);
     }
-    
+    /**
+     * */
     @GetMapping("/login/getidentifyCode")
     public void getidentifyCode(HttpServletRequest request,HttpServletResponse response) throws IOException{
         //设置不缓存图片

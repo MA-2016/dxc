@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
-import static com.mobileai.dxc.util.ServiceIntStringSwitch.intArray2String;
+import static com.mobileai.dxc.util.IntStringUtils.intArray2String;
 
 @Data
 public class Order {
