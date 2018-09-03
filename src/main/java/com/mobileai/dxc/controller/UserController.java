@@ -4,9 +4,7 @@ import com.mobileai.dxc.db.pojo.User;
 import com.mobileai.dxc.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -24,9 +22,11 @@ public class UserController {
      * @return 是否更新成功
      * 
      */
-    @GetMapping("/updateuser")
+    @PutMapping("/updateuser")
     boolean updateuser(User user) {
+        //satckoverflow
         return updateuser(user);
+
     }
 
     /**

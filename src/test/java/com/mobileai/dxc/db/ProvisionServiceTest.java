@@ -4,20 +4,13 @@ import com.mobileai.dxc.db.mapper.SellerMapper;
 import com.mobileai.dxc.db.pojo.Picture;
 import com.mobileai.dxc.db.pojo.Provision;
 import com.mobileai.dxc.service.ProvisionService;
-import com.mobileai.dxc.service.imple.ProvisionServiceImple;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
-import org.springframework.stereotype.Controller;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.awt.geom.PathIterator;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -36,7 +29,7 @@ public class ProvisionServiceTest {
     @Test
     public void tryTest() {
 
-        System.out.println("serviceid +" + provisionService.addSerive(1,"sell lily", "卖百合花", 30f, 30f));
+        System.out.println("serviceid +" + provisionService.addService(1,"sell lily", "卖百合花", 30f, 30f));
     }
 
     @Test
@@ -54,7 +47,7 @@ public class ProvisionServiceTest {
     @Test
     public void test3() {
         Provision p = new Provision("rose", "玫瑰花", 30f, 30f);
-        provisionService.updateService(17, p);
+      //  provisionService.updateService(17, p);
     }
 
     @Test

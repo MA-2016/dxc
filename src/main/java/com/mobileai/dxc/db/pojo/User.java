@@ -65,21 +65,60 @@ public class User {
         }
 
     }
-    public void setcreateTime(Date createTime){
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isCertified() {
+        return certified;
+    }
+
+    public void setCertified(boolean certified) {
+        this.certified = certified;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPicName() {
+        return picName;
+    }
+
+    public void setPicName(String picName) {
+        this.picName = picName;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public void setupdateTime(Date updateTime){
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
-
-    
-    public Date getcreateTime(){
-        return this.createTime;
-    }
-
-    public Date getupdateTime(){
-        return this.updateTime;
-    }
-
 }

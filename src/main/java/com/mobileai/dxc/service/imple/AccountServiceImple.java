@@ -52,8 +52,8 @@ public class AccountServiceImple implements AccountService {
             case 2:
                 User user = new User();
                 user.setPhone(phone);
-                user.setcreateTime(new Date());
-                user.setupdateTime(new Date());
+                user.setCreateTime(new Date());
+                user.setUpdateTime(new Date());
                 userMapper.addUser(user);
                 targetId = user.getUserId();
                 break;
@@ -85,6 +85,7 @@ public class AccountServiceImple implements AccountService {
     public Result validate(String name, String password, String identifyCode, String randomStr) {
         String secretpassword = MD5Utils.md5(password);
         Account account = accountMapper.selectByName(name);
+
         if (identifyCode.equals(randomStr)) {
             if (secretpassword.equals(account.getpassword())) {
                 switch (account.getidentifyMark()) {

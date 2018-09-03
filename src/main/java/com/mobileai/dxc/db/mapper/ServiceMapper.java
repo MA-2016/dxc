@@ -22,6 +22,9 @@ public interface ServiceMapper {
     @Lang(UpdateDriver.class)
     int updateServiceById(Provision provision);
 
+    @Select("select seller_id from service where service_id =#{serviceId}")
+    int selectSellerIdByserviceId(@Param("serviceId")int serviceId);
+
     @Select("SELECT * FROM `service` WHERE service_id =#{serviceId}")
     @Results(id="serviceResultMapper",value={
             @Result(id=true, property = "serviceId",column = "service_id"),
@@ -40,6 +43,7 @@ public interface ServiceMapper {
 
     @Select("SELECT order_num FROM `service` WHERE service_id =#{serviceId}")
     int selectOrderNumById(@Param("serviceId") int serviceId);
+
     @Select("select picture from service where service_id = #{serviceId}")
     String selectPictureById(@Param("serviceId") int serviceId);
 }

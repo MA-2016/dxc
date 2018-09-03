@@ -5,10 +5,7 @@ import com.mobileai.dxc.service.OrderService;
 import com.mobileai.dxc.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 //周恩华负责
 @RestController
@@ -20,12 +17,13 @@ public class IndentController{
     @Autowired
     private OrderService orderservice;
 
-    @GetMapping("/submit")
+
     /**
      * @param 订单信息
      * 
      * @return 订单id
      */
+    @PostMapping("/submit")
     public int submitOrder(@RequestParam int userId,@RequestParam int sellerId,@RequestParam int number,@RequestParam long serviceTime,@RequestParam int[] service){
         return userService.submitOrder(userId, sellerId, number, serviceTime, service);
     }

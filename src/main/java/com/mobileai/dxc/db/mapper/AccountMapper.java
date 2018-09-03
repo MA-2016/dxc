@@ -2,10 +2,8 @@ package com.mobileai.dxc.db.mapper;
 
 import com.mobileai.dxc.db.pojo.Account;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Mapper
 public interface AccountMapper{
@@ -22,5 +20,13 @@ public interface AccountMapper{
     boolean IsSeller(@Param("username") String username);
     
     @Select("select * from account where username = #{username}")
+    @Results(id="accountResultMapper",value={
+            @Result(id=true, property = "accountId",column = "id"),
+            @Result(property = "name",column ="username" ),
+            @Result(property = "targetId",column ="target_id" ),
+            @Result(property = "createTime",column ="create_time" ),
+            @Result(property ="updateTime",column = "update_time"),
+            @Result(property = "identifyMark",column ="identify_mark" )
+    })
     Account selectByName(@Param("username") String username);
 }

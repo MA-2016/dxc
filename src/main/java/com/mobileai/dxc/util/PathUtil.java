@@ -14,7 +14,7 @@ public class PathUtil{
         String os = System.getProperty("os.name");
         String basePath = "";
         if(os.toLowerCase().startsWith("win")){
-            basePath = "F:/test/picture/";
+            basePath = "D:/dxc/picture/";
         }else{
             basePath = "/home/dxc_pic/image";
         }

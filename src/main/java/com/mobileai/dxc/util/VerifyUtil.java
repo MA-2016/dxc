@@ -17,7 +17,7 @@ public class VerifyUtil {
         Graphics g = image.getGraphics(); // 创建Graphics对象，其作用于画笔
         Graphics2D g2d = (Graphics2D) g; // 创建Grapchics2D对象
         Random random = new Random();
-        Font font = new Font("华文宋体", Font.BOLD, 19);
+        Font font = new Font("华文宋体", Font.BOLD, 24);
         g.setColor(getRandColor(200, 250));
         g.fillRect(0, 0, width, height);
         g.setFont(font);
@@ -36,53 +36,17 @@ public class VerifyUtil {
 
         // 绘制验证码
         String sRand = "";
-        String ctmp = "";
+        char ctmp;
         for (int i = 0; i < 4; i++) {
-            // 根据需要该段生成汉字的代码可注释掉
-            // 生成汉字
-            String[] rBase = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
-            // 生成第一位区码
-            int r1 = random.nextInt(3) + 11;
-            String str_r1 = rBase[r1];
-            // 生成第二位区码
-            int r2;
-            if (r1 == 13) {
-                r2 = random.nextInt(7);
-            } else {
-                r2 = random.nextInt(16);
-            }
-            String str_r2 = rBase[r2];
-            // 生成第一位位码
-            int r3 = random.nextInt(6) + 10;
-            String str_r3 = rBase[r3];
-            // 生成第二位位码
-            int r4;
-            if (r3 == 10) {
-                r4 = random.nextInt(15) + 1;
-            } else if (r3 == 15) {
-                r4 = random.nextInt(15);
-            } else {
-                r4 = random.nextInt(16);
-            }
-            String str_r4 = rBase[r4];
-            // 将生成的机内码转换为汉字
-            byte[] bytes = new byte[2];
-            // 将生成的区码保存到字节数组的第一个元素中
-            String str_12 = str_r1 + str_r2;
-            int tempLow = Integer.parseInt(str_12, 16);
-            bytes[0] = (byte) tempLow;
-            // 将生成的位码保存到字节数组的第二个元素中
-            String str_34 = str_r3 + str_r4;
-            int tempHigh = Integer.parseInt(str_34, 16);
-            bytes[1] = (byte) tempHigh;
-            ctmp = new String(bytes);// 该段生成汉字的代码可注释掉
-
+            do{
+                ctmp =  (char)('a'+Math.random()*('z'-'a'+1));
+            }while(ctmp=='l'||ctmp=='o');
             sRand += ctmp;
             Color color = new Color(20 + random.nextInt(110), 20 + random.nextInt(110), 20 + random.nextInt(110));
             g.setColor(color);
-            g.drawString(ctmp, 19 * i + 19, 19);
-        }
+            g.drawString(ctmp+"", 19 *i + 19, 19);
 
+        }
         g.dispose();
 
         return new Object[] { sRand, image };

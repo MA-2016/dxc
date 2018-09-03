@@ -15,21 +15,23 @@ public class ImageUtil {
     private static final SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
     private static final Random r = new Random();
 
+    /**
+     * @return 返回文件名
+     * */
     public static String generateThumbnail(MultipartFile thumbnail, String targetAddr) {
         String realFileName = getRandomFileName();
         String extension = getFileExtension(thumbnail);
 
         makeDirPath(targetAddr);
-        String relativeAddr = targetAddr + realFileName + extension;
-        File dest = new File(PathUtil.getImgBasePath()+targetAddr);
-
+        String relativeAddr = targetAddr +System.getProperty("file.separator") + realFileName + extension;
+        File dest = new File(PathUtil.getImgBasePath()+relativeAddr);
         try {
             Thumbnails.of(thumbnail.getInputStream()).size(200, 200).outputQuality(0.8f).toFile(dest);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-		return relativeAddr;
+		return realFileName + extension;
     }
 
     /**

@@ -1,10 +1,7 @@
 package com.mobileai.dxc.db.pojo;
 
-import java.util.List;
-
+import com.mobileai.dxc.controller.*;
 import lombok.Data;
-import org.springframework.stereotype.Component;
-
 import static com.mobileai.dxc.util.IntStringUtils.intArray2String;
 
 @Data
@@ -21,6 +18,21 @@ public class Order {
         public static final int FINISHED = 4; // 已结束
 
     }
+//
+//    /**
+//     * 状态码后3位表示order状态，最后一位表示是否已经服务，倒数2、3位表示商家处理状态
+//     * 最后一位：0未服务，1已服务
+//     * 第6、7位，00等待处理，01接受订单，10拒绝订单
+//     * 在StatusUtils进行处理
+//     */
+//    public static class Status {
+//        public static final int INSERVICED = 0; //xx0 未服务
+//        public static final int SERVICED = 1; //xx1 未服务
+//        public static final int UNHANDLE = 0;//00x  等待处理
+//        public static final int ACCEPT = 2 ;//01x 接受订单
+//        public static final int REFUSE = 4 ;//10x 拒绝订单
+//    }
+
 
     private int orderId;
 
