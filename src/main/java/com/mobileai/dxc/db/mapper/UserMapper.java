@@ -17,7 +17,7 @@ public interface UserMapper {
     @Select("select * from user where user_id = #{userId}")
     User selectById(@Param("userId")int userId);
 
-    @Update("update user (#{seller}) where user_id = #{userId}")
+    @Update("update user (#{user}) where user_id = #{userId}")
     @Lang(UpdateDriver.class)
     void updateUserById(User user);
 }

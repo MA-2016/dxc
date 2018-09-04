@@ -18,7 +18,7 @@ public class User {
 
     private String phone;
 
-    private String picName;
+    private String picPath;
 
     private Date createTime;
 
@@ -55,8 +55,8 @@ public class User {
             return this;
         }
 
-        public Builder setPicName(String picName) {
-            ins.picName = picName;
+        public Builder setPicName(String picPath) {
+            ins.picPath = picPath;
             return this;
         }
 
@@ -99,11 +99,11 @@ public class User {
     }
 
     public String getPicName() {
-        return picName;
+        return picPath;
     }
 
     public void setPicName(String picName) {
-        this.picName = picName;
+        this.picPath = picName;
     }
 
     public Date getCreateTime() {
@@ -121,4 +121,9 @@ public class User {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    public String getPicPath() {
+        return picPath;
+    }
+
 }

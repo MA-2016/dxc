@@ -20,7 +20,7 @@ public class ServiceController {
      * @Param sellerId:
      * @Param provision：
      **/
-    @PutMapping("/addservice")
+    @PostMapping("/addservice")
     public int addService(@RequestParam int sellerId, @RequestParam String name, @RequestParam String description, @RequestParam float price, @RequestParam float prePrice) {
         return provisionService.addService(sellerId, name, description, price, prePrice);
     }

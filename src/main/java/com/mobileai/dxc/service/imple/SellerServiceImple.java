@@ -4,6 +4,7 @@ import com.mobileai.dxc.db.mapper.IndentMapper;
 import com.mobileai.dxc.db.mapper.SellerMapper;
 import com.mobileai.dxc.db.mapper.UserMapper;
 import com.mobileai.dxc.db.pojo.Order;
+import com.mobileai.dxc.db.pojo.Seller;
 import com.mobileai.dxc.service.SellerService;
 import com.mobileai.dxc.util.Result;
 import com.mobileai.dxc.util.SendMsgUtils;
@@ -53,5 +54,17 @@ public class SellerServiceImple implements SellerService {
 
 
         return new Result(SUCCESS);
+    }
+
+    @Override
+    public Result updateSeller(Seller seller) {
+        sellerMapper.updateSellerById(seller);
+        return new Result(200,"商家信息",sellerMapper.selectById(seller.getSellerId()));
+
+    }
+
+    @Override
+    public Result getSeller(int sellerId) {
+        return new Result(200,"更新成功",sellerMapper.selectById(sellerId));
     }
 }

@@ -16,11 +16,6 @@ public class SearchController {
     @Autowired
     SearchService searchService;
 
-    // @GetMapping("/searchseller")
-    // public Result searchSeller() {
-
-    // }
-
     @GetMapping("/DynamicRecommend")
     public Result dynamicRecommend(String location, String topic) {
         return searchService.dynamicRecommend(location, topic);

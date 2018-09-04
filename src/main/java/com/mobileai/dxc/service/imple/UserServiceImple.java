@@ -8,6 +8,7 @@ import com.mobileai.dxc.service.UserService;
 
 
 import com.mobileai.dxc.util.IntStringUtils;
+import com.mobileai.dxc.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,14 @@ public class UserServiceImple implements UserService{
     }
 
 	@Override
-	public User getUser(int userId) {
-		return userMapper.selectById(userId);
+	public Result getUser(int userId) {
+		return new Result(200,"用户信息",userMapper.selectById(userId));
 	}
+
+	@Override
+    public Result updateUser(User user){
+
+        userMapper.updateUserById(user);
+        return new Result(200,"更新成功",userMapper.selectById(user.getUserId()));
+    }
 }

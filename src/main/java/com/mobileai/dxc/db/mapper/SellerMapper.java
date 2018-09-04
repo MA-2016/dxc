@@ -25,6 +25,7 @@ public interface SellerMapper {
     @Update("update seller (#{seller}) where seller_id = #{sellerId}")
     @Lang(UpdateDriver.class)
     void updateSellerById(Seller seller);
+
     @Select("select service from seller where seller_id= #{sellerId}")
     String selectServiceById(@Param("sellerId")int  sellerId);
 }
