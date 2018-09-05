@@ -30,4 +30,9 @@ public class RecordServiceImple implements RecordSevice {
     public Record getById(int recordId) {
         return recordMapper.selectById(recordId);
     }
+
+    @Override
+    public Record getByOrderId(int orderId) {
+        return recordMapper.selectByOrderId(orderId);
+    }
 }

@@ -103,6 +103,11 @@
             <type>maven-plugin</type>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
         <!-- goolge -->
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
         <dependency>

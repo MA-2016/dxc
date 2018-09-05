@@ -25,4 +25,7 @@ public interface IndentMapper {
     @Select("select * from indent where order_id = #{orderId}")
     Order selectByOrderid(@Param("orderId") int orderId);
 
+    @Select("select record_id from indent where service_time =#{serviceTime}")
+    int selectIdByTime(@Param("serviceTime")long serviceTime);
+
 }

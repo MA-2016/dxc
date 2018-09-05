@@ -9,4 +9,6 @@ public interface RecordSevice {
     int updateStatusByRecord(int status,int recordId);
 
     Record getById(int recordId);
+
+    Record getByOrderId(int orderId);
 }

@@ -54,15 +54,16 @@ public class WxPayService extends WXPay {
     /**
      * 进行下单请求
      *
-     * @param product_id   订单ID
+     * @param order_id   订单ID
      * @param total_fee    总费用，单位为分
      * @param out_trade_no 内部订单记录ID
      * @return 用于生成二维码的链接，如发生错误，返回空
      * @throws Exception
      */
-    public String applyOrder(String product_id, int total_fee, String out_trade_no){
+    public String applyOrder(String order_id, int total_fee, String out_trade_no){
         String fee = String.valueOf(total_fee);
         String body =" ";
+
 
 
         data = new HashMap<>();
@@ -73,7 +74,7 @@ public class WxPayService extends WXPay {
         data.put("notify_url", notif_url);
         data.put("total_fee", fee);
         data.put("trade_type", trade_type);  // 此处指定为扫码支付
-        data.put("product_id", product_id);
+        data.put("product_id", order_id);
 
         Map<String, String> res = null;
         try {
@@ -160,8 +161,8 @@ public class WxPayService extends WXPay {
                     return true;
                 } else if ("PROCESSING".equals(res.get("refund_status"))) {
                     flag = true;
-                    //如果正在处理中，睡30s再查询
-                    Thread.sleep(30);
+                    //如果正在处理中，睡5s再查询
+                    Thread.sleep(5000);
                 } else {
                     break;
                 }
@@ -181,11 +182,13 @@ public class WxPayService extends WXPay {
     public Map<String, String> queryPay(String result) throws Exception {
         Map<String, String> res = WXPayUtil.xmlToMap(result);
         Map<String, String> map = null;
-
+        String out_trade_no=res.get("out_trade_no");
+        map.put("recordId",out_trade_no);
         if (res.get("return_code").equals("SUCCESS") & res.get("result_code").equals("SUCCESS")) {
             if (super.isPayResultNotifySignatureValid(res)) {
                 //huoqu 获取订单的费用
                 int fee = recordMapper.selectFeeById(Integer.parseInt(res.get("out_trade_no")) * 100);
+
                 if (Integer.parseInt(res.get("total_fee")) >= fee) {
                     map.put("return_code", "SUCCESS");
                 } else {

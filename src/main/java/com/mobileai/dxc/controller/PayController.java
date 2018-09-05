@@ -1,8 +1,16 @@
 package com.mobileai.dxc.controller;
 
+/**
+ * 支付时，前端所做流程如下：
+ * 通过applyOrder发起请求
+ * 同时使用WebSocket连接后端，链接为server
+ * 创建socketJs var socket = new SockJS('/server'+name)。name为orderId
+ * 等待后端支付结果通知。有结果后关闭连接
+*/
 
-
+import com.mobileai.dxc.db.pojo.Order;
 import com.mobileai.dxc.db.pojo.Record;
+import com.mobileai.dxc.service.OrderService;
 import com.mobileai.dxc.service.RecordSevice;
 import com.mobileai.dxc.service.imple.WxPayService;
 
@@ -18,8 +26,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Map;
 
-// @RestController
-@EnableAutoConfiguration
+@RestController
+
 @RequestMapping("/pay")
 public class PayController {
     @Autowired
@@ -27,6 +35,9 @@ public class PayController {
 
     @Autowired
     private RecordSevice recordSevice;
+
+    @Autowired
+    private OrderService orderService;
 
     //请求支付发起，返回支付链接 用此生成二维码
 
@@ -38,17 +49,17 @@ public class PayController {
     /**
      * 请求支付发起
      *
-     * @param recordId 订单记录号
+     * @param orderId 订单号
      * @return 返回支付链接 用此生成二维码
      */
 
     @GetMapping("/applyOrder")
-    public String applyOrder(@RequestParam int recordId) {
-        Record record = recordSevice.getById(recordId);
-        String orderId = record.getOrderId() + "";
+    public String applyOrder(@RequestParam int orderId) {
+        Record record = recordSevice.getById(orderId);
+        String out_trade_no = record.getRecordId() + "";
         int fee = record.getFee() * 100;
-        String out_trade_no = recordId + "";
-        String url = wxPayService.applyOrder(orderId, fee, out_trade_no);
+        String id= orderId + "";
+        String url = wxPayService.applyOrder(id, fee, out_trade_no);
 
         return url;
     }
@@ -72,8 +83,8 @@ public class PayController {
             status = Record.StatusCode.REFUND_FAILED;
         }
         recordSevice.updateStatusByRecord(0, recordId);
-        // TODO: 2018/7/25  退款成功就把订单的状态设为结束
 
+         orderService.confirmPayment(recordId, Order.Status.FINISHED);
         return bool;
     }
 
@@ -89,6 +100,9 @@ public class PayController {
     @GetMapping("/wxPayFeedBack")
     public Map<String, String> indentFeedBack(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, String> map = null;
+        Map<String, String> res = null;
+        res.put("return_code", "SUCCESS");
+        res.put("return_msg","OK");
         map.put("return_code", "FALL");
 
         InputStream inStream = request.getInputStream();
@@ -108,13 +122,20 @@ public class PayController {
             map = wxPayService.queryPay(result);
 
         }
-        // TODO: 2018/7/25    改变订单的状态
+
+        String id=map.get("recordId");
+        int recordId=Integer.parseInt(id);
+        int orderId=recordSevice.getById(recordId).getOrderId();
         if ("SUCCESS".equals(map.get("return_code"))) {
+            recordSevice.updateStatusByRecord(Record.StatusCode.PAY_SUCCESS, recordId);
+            orderService.confirmPayment(orderId, Order.Status.INSERVICED);
+            Endpoint.sendOne(id, map.get("return_msg"));
             //调用通知前端的接口
         } else {
-
+            recordSevice.updateStatusByRecord(Record.StatusCode.PAY_FAILED, recordId);
+            Endpoint.sendOne(id, map.get("return_msg"));
         }
-        return map;
+        return res;
 
     }
 

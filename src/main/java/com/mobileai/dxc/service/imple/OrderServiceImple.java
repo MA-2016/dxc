@@ -1,7 +1,9 @@
 package com.mobileai.dxc.service.imple;
 
 import com.mobileai.dxc.db.mapper.IndentMapper;
+import com.mobileai.dxc.db.mapper.RecordMapper;
 import com.mobileai.dxc.db.pojo.Order;
+import com.mobileai.dxc.db.pojo.Record;
 import com.mobileai.dxc.service.OrderService;
 import com.mobileai.dxc.service.SellerService;
 
@@ -16,6 +18,9 @@ public class OrderServiceImple implements OrderService{
     private IndentMapper indentMapper;
 
     @Autowired
+    private RecordMapper recordMapper;
+
+    @Autowired
     private SellerService sellerService;
     /**
      * 提交新订单，由UserService调用
@@ -26,6 +31,10 @@ public class OrderServiceImple implements OrderService{
     @Override 
     public int submitOrder(Order order){
         indentMapper.createOrder(order.getUserId(),order.getSellerId(),order.getNumber(),order.getServiceTime(),order.getService());
+        long time=order.getServiceTime();
+        int recordId=indentMapper.selectIdByTime(time);
+        int fee=(int)order.getTotalPrice();
+        recordMapper.addRecord(recordId,0,fee);
         sellerService.notifyNewOrder(order);
         return indentMapper.selectOrderidByUserid(order.getUserId());
     }   
@@ -41,7 +50,7 @@ public class OrderServiceImple implements OrderService{
 
     /**
      * 获取订单信息
-     * @param oid 订单号
+     * @param orderId 订单号
      */
     @Override
     public Order getOrderInfo(int orderId){
