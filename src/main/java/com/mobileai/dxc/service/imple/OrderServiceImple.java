@@ -3,7 +3,6 @@ package com.mobileai.dxc.service.imple;
 import com.mobileai.dxc.db.mapper.IndentMapper;
 import com.mobileai.dxc.db.mapper.RecordMapper;
 import com.mobileai.dxc.db.pojo.Order;
-import com.mobileai.dxc.db.pojo.Record;
 import com.mobileai.dxc.service.OrderService;
 import com.mobileai.dxc.service.SellerService;
 

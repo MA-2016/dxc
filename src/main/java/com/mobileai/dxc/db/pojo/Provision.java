@@ -1,10 +1,5 @@
 package com.mobileai.dxc.db.pojo;
 
-import org.springframework.context.annotation.Primary;
-
-import javax.xml.soap.SAAJResult;
-import java.awt.peer.PanelPeer;
-
 public class Provision {
     private Integer serviceId;
     private Integer sellerId;

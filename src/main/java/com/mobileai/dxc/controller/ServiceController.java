@@ -2,7 +2,6 @@ package com.mobileai.dxc.controller;
 
 import com.mobileai.dxc.db.pojo.Provision;
 import com.mobileai.dxc.service.ProvisionService;
-import com.mobileai.dxc.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

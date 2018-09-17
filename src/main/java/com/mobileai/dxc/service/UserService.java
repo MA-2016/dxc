@@ -4,7 +4,6 @@ import com.mobileai.dxc.db.pojo.User;
 
 import com.mobileai.dxc.util.Result;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public interface UserService {

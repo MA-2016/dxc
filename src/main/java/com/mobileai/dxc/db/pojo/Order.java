@@ -1,6 +1,5 @@
 package com.mobileai.dxc.db.pojo;
 
-import com.mobileai.dxc.controller.*;
 import lombok.Data;
 import static com.mobileai.dxc.util.IntStringUtils.intArray2String;
 

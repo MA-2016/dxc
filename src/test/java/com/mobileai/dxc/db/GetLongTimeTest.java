@@ -1,11 +1,9 @@
 package com.mobileai.dxc.db;
 
 import org.junit.Test;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class GetLongTimeTest {
     @Test

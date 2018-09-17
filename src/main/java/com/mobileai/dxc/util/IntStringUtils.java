@@ -1,8 +1,5 @@
 package com.mobileai.dxc.util;
 
-import javax.xml.ws.Service;
-import java.util.StringTokenizer;
-
 //todo：抛异常的处理
 /**
  *功能：数组形式和String形式的转换，

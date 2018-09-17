@@ -1,7 +1,5 @@
 package com.mobileai.dxc.service;
 
-import com.mobileai.dxc.db.pojo.Order;
-
 public interface EvaluateService{
     /**
      * 提交评论

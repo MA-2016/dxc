@@ -11,7 +11,7 @@ import net.coobird.thumbnailator.Thumbnails;
 
 public class ImageUtil {
 
-    private static String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+    // private static String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
     private static final SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
     private static final Random r = new Random();
 

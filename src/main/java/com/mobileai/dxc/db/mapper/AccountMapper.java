@@ -3,7 +3,6 @@ package com.mobileai.dxc.db.mapper;
 import com.mobileai.dxc.db.pojo.Account;
 
 import org.apache.ibatis.annotations.*;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Mapper
 public interface AccountMapper{

@@ -20,7 +20,6 @@ import static com.mobileai.dxc.util.DeleteDirectory.deleteDirectory;
 import static com.mobileai.dxc.util.ImageUtil.generateThumbnail;
 import static com.mobileai.dxc.util.IntStringUtils.addSubString;
 import static com.mobileai.dxc.util.IntStringUtils.deleteSubString;
-import static com.mobileai.dxc.util.IntStringUtils.replaceString;
 import static com.mobileai.dxc.util.PathUtil.getImgBasePath;
 
 @Service
@@ -175,7 +174,7 @@ public class ProvisionServiceImple implements ProvisionService {
         Picture picture =new Picture();
         picture.setPicturePath(relativeStorePath);
         picture.setServiceId(serviceId);
-        int picId =pictureMapper.addPicture(picture);
+        // int picId =pictureMapper.addPicture(picture);
 
         //把照片目录更新到service表
         provision.setPicture(getImgBasePath()+provision.getServiceId()+"");

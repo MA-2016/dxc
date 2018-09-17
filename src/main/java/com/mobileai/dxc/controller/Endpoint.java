@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Endpoint {
     private Session session;
     public static  int count;
-    private static HashMap<String,Endpoint> endPointMap=new HashMap();
+    private static HashMap<String,Endpoint> endPointMap=new HashMap<>();
     private String name;
     @OnOpen
     public void open(@Param(value = "name") String name, Session session,EndpointConfig config){

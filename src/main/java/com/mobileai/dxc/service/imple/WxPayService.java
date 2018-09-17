@@ -169,7 +169,7 @@ public class WxPayService extends WXPay {
             }
         }
 
-        return false;
+        return flag;
     }
 
     /**
@@ -181,7 +181,7 @@ public class WxPayService extends WXPay {
      */
     public Map<String, String> queryPay(String result) throws Exception {
         Map<String, String> res = WXPayUtil.xmlToMap(result);
-        Map<String, String> map = null;
+        Map<String, String> map = new HashMap<>();
         String out_trade_no=res.get("out_trade_no");
         map.put("recordId",out_trade_no);
         if (res.get("return_code").equals("SUCCESS") & res.get("result_code").equals("SUCCESS")) {

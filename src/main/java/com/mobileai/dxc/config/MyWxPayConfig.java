@@ -2,13 +2,8 @@
 package com.mobileai.dxc.config;
 
 import com.github.wxpay.sdk.WXPayConfig;
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**

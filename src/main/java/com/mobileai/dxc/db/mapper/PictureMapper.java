@@ -1,10 +1,7 @@
 package com.mobileai.dxc.db.mapper;
 
 import com.mobileai.dxc.db.pojo.Picture;
-import com.mobileai.dxc.db.pojo.Seller;
 import org.apache.ibatis.annotations.*;
-import org.springframework.web.bind.annotation.PutMapping;
-import sun.security.jca.ServiceId;
 
 import java.util.List;
 

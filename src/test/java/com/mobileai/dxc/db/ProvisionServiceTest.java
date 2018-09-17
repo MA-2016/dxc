@@ -46,7 +46,7 @@ public class ProvisionServiceTest {
 
     @Test
     public void test3() {
-        Provision p = new Provision("rose", "玫瑰花", 30f, 30f);
+        // Provision p = new Provision("rose", "玫瑰花", 30f, 30f);
       //  provisionService.updateService(17, p);
     }
 

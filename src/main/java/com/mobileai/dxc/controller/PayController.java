@@ -16,7 +16,6 @@ import com.mobileai.dxc.service.imple.WxPayService;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,15 +75,15 @@ public class PayController {
     public boolean queryRefund(@RequestParam int recordId) throws Exception {
         wxPayService.applyRefund(recordId);
         boolean bool = wxPayService.queryRefund(recordId);
-        int status = Record.StatusCode.APPLY_REFUND;
-        if (bool) {
-            status = Record.StatusCode.REFUND_SUCCESS;
-        } else {
-            status = Record.StatusCode.REFUND_FAILED;
-        }
+        // int status = Record.StatusCode.APPLY_REFUND;
+        // if (bool) {
+        //     status = Record.StatusCode.REFUND_SUCCESS;
+        // } else {
+        //     status = Record.StatusCode.REFUND_FAILED;
+        // }
         recordSevice.updateStatusByRecord(0, recordId);
 
-         orderService.confirmPayment(recordId, Order.Status.FINISHED);
+        orderService.confirmPayment(recordId, Order.Status.FINISHED);
         return bool;
     }
 
