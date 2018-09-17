@@ -1,4 +1,6 @@
 .settins/
+.idea/
+.vscode/
 target/
 .classpath
 .factorypath
@@ -6,4 +8,3 @@ target/
 mvnw
 mvnw.cmd
 .workspace.xml
-.idea/workspace.xml
